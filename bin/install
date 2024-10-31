@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -11,8 +11,8 @@ print () {
 
 print "=> Starting Install"
 
-#print "==> Formatting Code"
-#alejandra .
+print "==> Formatting Code"
+alejandra .
 
 print "==> Rebuilding NixOS"
 git add .

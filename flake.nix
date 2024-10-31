@@ -2,12 +2,17 @@
   inputs = {
     # NixOS official package source, here using the nixos-23.11 branch
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     flake-utils.url = "github:numtide/flake-utils";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    meenzenDot.url = "github:meenzen/nixos/main";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -43,14 +48,26 @@
       );
   in {
     inherit (devShells) devShells;
-    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs;
+
+    nixosConfigurations = {
+      wsl = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        system = "x86_64-linux";
+        modules = [
+          ./nixos/systems/wsl/configuration.nix
+        ];
       };
-      system = "x86_64-linux";
-      modules = [
-        ./nixos/systems/wsl/configuration.nix
-      ];
+      vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        system = "x86_64-linux";
+        modules = [
+          ./nixos/systems/vm/configuration.nix
+        ];
+      };
     };
   };
 }
