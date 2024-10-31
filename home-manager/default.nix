@@ -15,6 +15,7 @@
   programs.direnv.nix-direnv.enable = true;
   programs.git = {
     enable = true;
+    extraConfig.rerere.enabled = true;
     userName = "Slay326";
     userEmail = "sleither.reyes@gmx.de";
   };
