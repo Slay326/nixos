@@ -1,8 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-# NixOS-WSL specific options are documented on the NixOS-WSL repository:
-# https://github.com/nix-community/NixOS-WSL
 {
   config,
   lib,
@@ -11,47 +6,30 @@
   ...
 }: {
   imports = [
-    # include NixOS-WSL modules
-    inputs.nixos-wsl.nixosModules.default
+    # include NixOS-vm modules
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.nixos = import "${inputs.self}/home-manager";
-      home-manager.extraSpecialArgs = {
-        inherit inputs;
-      };
+      #      home-manager.users.nixos = import ./home-manager;
 
       # Optionally, use home-manager.extraSpecialArgs to pass
       # arguments to home.nix
     }
   ];
 
-  wsl = {
+  vm = {
     enable = true;
-    defaultUser = "nixos";
+    defaultUser = "vm";
   };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.docker.enable = true;
-
-  networking = {
-    hostName = "wsl";
-    nameservers = [
-      "8.8.8.8"
-      "1.1.1.1"
-    ];
-  };
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    bash
-    husky
-    curl
-    (dotnetCorePackages.combinePackages [
-      dotnetCorePackages.sdk_8_0
-      dotnetCorePackages.sdk_9_0
-    ])
-    dotnetPackages.Nuget
+  networking.hostName = "vm";
+  environment.systemPackages = [
+    pkgs.vim
+    pkgs.git
+    pkgs.bash
+    pkgs.qemu
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

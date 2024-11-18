@@ -41,6 +41,7 @@
               echo "$(git --version)"
               echo "$(nil --version)"
               echo "$(alejandra --version)"
+
               echo ""
             '';
           };
