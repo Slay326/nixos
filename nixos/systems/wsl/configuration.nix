@@ -36,13 +36,12 @@
 
   networking = {
     hostName = "wsl";
-    nameservers = [
-      "8.8.8.8"
-      "1.1.1.1"
-    ];
   };
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
+    fastfetch
+    wget
+    nmap
     git
     bash
     husky

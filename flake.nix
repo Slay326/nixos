@@ -60,15 +60,12 @@
           ./nixos/systems/wsl/configuration.nix
         ];
       };
-      vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        system = "x86_64-linux";
-        modules = [
-          ./nixos/systems/vm/configuration.nix
-        ];
-      };
+    };
+
+    defaultApp = {
+      # Standardkonfiguration auf nixosConfigurations.wsl festlegen
+      type = "nixosConfigurations";
+      config = self.nixosConfigurations.wsl;
     };
   };
 }
