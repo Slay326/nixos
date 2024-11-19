@@ -1,6 +1,6 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
-  nativeBuildInputs = [pkgs.git];
+  nativeBuildInputs = [pkgs.git pkgs.alejandra];
 
   shellHook = ''
     echo "Git and experimental features enabled."
