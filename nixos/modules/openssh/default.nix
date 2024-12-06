@@ -9,7 +9,7 @@
   };
 
   services.fail2ban = {
-    enable = true;
+    enable = false;
     bantime = "1h";
     bantime-increment.enable = true;
     ignoreIP = [
