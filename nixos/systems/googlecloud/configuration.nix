@@ -12,10 +12,12 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/java/default.nix
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.docker.enable = true;
+  virtualisation.qemu.guestAgent.enable = true;
   slay.java.enable = true;
 
   networking = {
@@ -26,6 +28,7 @@
     neovim
     fastfetch
     wget
+    google-guest-agent
   ];
 
   system.stateVersion = "24.05";

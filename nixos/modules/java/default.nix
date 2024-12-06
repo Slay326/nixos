@@ -11,8 +11,7 @@ in {
     enable = lib.mkEnableOption "Enable java";
   };
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; 
-    [
+    environment.systemPackages = with pkgs; [
       jre8
     ];
   };
