@@ -36,7 +36,6 @@ in {
         slay = {
           isNormalUser = true;
           extraGroups = ["wheel"];
-          hashedPassword = "!";
           openssh.authorizedKeys.keys = [slay];
         };
       };

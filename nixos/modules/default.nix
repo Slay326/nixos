@@ -5,6 +5,7 @@
     ./nix
     ./optimization
     ./openssh
+    ./sytem-packages
     ./wsl
   ];
 }
