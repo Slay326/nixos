@@ -16,6 +16,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.docker.enable = true;
+  slay.java.enable = true;
 
   networking = {
     hostName = "slaymc";
