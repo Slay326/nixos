@@ -17,7 +17,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.docker.enable = true;
-  virtualisation.qemu.guestAgent.enable = true;
+  services.qemuGuest.enable = true;
   slay.java.enable = true;
 
   networking = {
