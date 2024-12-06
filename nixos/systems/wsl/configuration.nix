@@ -30,6 +30,8 @@
   wsl = {
     enable = true;
     defaultUser = "nixos";
+    usbip.enable = true;
+    usbip.autoAttach = ["2-3"];
   };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.docker.enable = true;
@@ -37,7 +39,17 @@
   networking = {
     hostName = "wsl";
   };
+
+  boot.kernelModules = [
+    "vhci-hcd"
+    "usbip-host"
+  ];
+
   environment.systemPackages = with pkgs; [
+    linuxPackages.usbip
+    sudo
+    kmod
+    usbutils
     neovim
     fastfetch
     wget
@@ -46,15 +58,36 @@
     bash
     husky
     curl
+    openssh
     (dotnetCorePackages.combinePackages [
-      dotnetCorePackages.sdk_8_0
       dotnetCorePackages.sdk_9_0
+      dotnetCorePackages.sdk_8_0
     ])
     dotnetPackages.Nuget
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   programs.nix-ld.enable = true;
+  systemd.tmpfiles.rules = [
+    "L! ~/.ssh/ssh-agent.sock - - - - /mnt/c/Users/reyess/AppData/Local/ssh-agent/ssh-agent.sock"
+  ];
+
+  services.pcscd.enable = true;
+  services.udev = {
+    enable = true;
+    packages = [pkgs.yubikey-personalization];
+  };
+
+  systemd.services.wslConfig = {
+    description = "Configure WSL settings";
+
+    # Die Datei /etc/wsl.conf wird durch diesen Service verwaltet
+    serviceConfig = {
+      ExecStart = "${pkgs.coreutils}/bin/echo '[wsl2]\nusbip=true\n' > /etc/wsl.conf";
+      Restart = "no";
+    };
+  };
+  environment.variables.SSH_AUTH_SOCK = "/home/nixos/.ssh/ssh-agent.sock";
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
