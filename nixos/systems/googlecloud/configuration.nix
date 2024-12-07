@@ -21,7 +21,7 @@
   slay.java.enable = true;
 
   networking = {
-    hostName = "slaymc";
+    hostName = "gce-01";
   };
 
   environment.systemPackages = with pkgs; [
@@ -31,5 +31,5 @@
     google-guest-agent
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "23.11";
 }
