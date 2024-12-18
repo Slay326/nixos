@@ -1,11 +1,13 @@
 {
   imports = [
+    ./docker
+    ./dotnet
     ./global-config
     ./java
     ./nix
-    ./optimization
     ./openssh
-    ./sytem-packages
+    ./optimization
+    ./system-packages
     ./wsl
   ];
 }

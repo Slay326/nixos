@@ -8,8 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    meenzenDot.url = "github:meenzen/nixos/main";
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,29 +59,17 @@
       slay = import ./nixos/modules;
       default = slay;
     };
-
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
         system = "x86_64-linux";
         modules = [
+          ./nixos/modules
           ./nixos/systems/wsl/configuration.nix
         ];
-      };
-    };
-
-    nixosConfigurations = {
-      googlecloud = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
         };
-        system = "x86_64-linux";
-        modules = [
-          ./nixos/systems/googlecloud/configuration.nix
-        ];
       };
     };
-  };
+};
 }

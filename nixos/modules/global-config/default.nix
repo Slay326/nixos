@@ -36,7 +36,7 @@ in {
         root = {
           openssh.authorizedKeys.keys = [slay];
         };
-        
+
         slay = {
           isNormalUser = true;
           extraGroups = ["wheel"];
