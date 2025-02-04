@@ -9,6 +9,7 @@
     ./dotnet
     ./global-config
     ./hardware
+    ./home-manager
     ./java
     ./latest-kernel
     ./locale
