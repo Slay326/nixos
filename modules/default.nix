@@ -10,7 +10,6 @@
     ./basic-packages
     ./bootloader
     ./hardware
-    ./install-iso
     ./plasma
     ./locale
     ./latest-kernel
