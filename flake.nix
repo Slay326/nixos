@@ -106,7 +106,7 @@
 
     defaultConfig = {
       user = {
-        username = "slay";
+        username = "reyess";
         fullName = "Sleither Reyes";
         email = "sleither.reyes@gmx.de";
         initialPassword = "password";

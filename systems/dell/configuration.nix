@@ -7,7 +7,7 @@
 }: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-    inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
+    inputs.nixos-hardware.nixosModules.dell-latitude-7430
     ./hardware-configuration.nix
   ];
 
