@@ -143,5 +143,5 @@
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
 
   };
-  }
+  };
 }
