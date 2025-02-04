@@ -1,27 +1,28 @@
 {
   imports = [
+    ./adb
+    ./basic-packages
+    ./bootloader
+    ./build-vm
+    ./desktop
     ./docker
     ./dotnet
     ./global-config
-    ./java
-    ./nix
-    ./build-vm
-    ./desktop
-    ./basic-packages
-    ./bootloader
     ./hardware
-    ./plasma
-    ./locale
+    ./java
     ./latest-kernel
+    ./locale
+    ./nix
+    ./openssh
+    ./optimization
+    ./plasma
     ./stylix
+    ./system-packages
     ./system-packages
     ./virtualbox
     ./workarounds
+    ./wsl
     ./yubikey
     ./zsh
-    ./openssh
-    ./optimization
-    ./system-packages
-    ./wsl
   ];
 }
