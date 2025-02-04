@@ -5,6 +5,21 @@
     ./global-config
     ./java
     ./nix
+    ./build-vm
+    ./desktop
+    ./basic-packages
+    ./bootloader
+    ./hardware
+    ./install-iso
+    ./plasma
+    ./locale
+    ./latest-kernel
+    ./stylix
+    ./system-packages
+    ./virtualbox
+    ./workarounds
+    ./yubikey
+    ./zsh
     ./openssh
     ./optimization
     ./system-packages
