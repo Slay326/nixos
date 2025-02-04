@@ -23,7 +23,7 @@
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
-  slay.home-manager.extraConfig = {
+/*   slay.home-manager.extraConfig = {
     additionalPinnedApps = [
       "applications:google-chrome.desktop"
       "applications:rider.desktop"
@@ -32,6 +32,6 @@
       "org.kde.plasma.battery"
     ];
   };
-
+ */
   services.teamviewer.enable = true;
 }
