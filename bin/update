@@ -9,10 +9,14 @@ print () {
     echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
 }
 
-print "=> Starting Install"
+print "=> Starting Update"
 
 print "==> Formatting Code"
 alejandra . >/dev/null 2>&1
+
+print "==> Updating Flake"
+git add .
+nix flake update --verbose
 
 print "==> Rebuilding NixOS"
 git add .
