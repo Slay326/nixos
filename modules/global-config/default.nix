@@ -39,7 +39,7 @@ in {
 
         slay = {
           isNormalUser = true;
-          extraGroups = ["wheel"];
+          extraGroups = ["wheel reyess"];
           openssh.authorizedKeys.keys = [slay];
         };
       };
