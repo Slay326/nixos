@@ -114,7 +114,7 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
           "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIB4aA4A1deXxm7i59Hb5S1gEygIluOLZluHnfGUWBVHUAAAABHNzaDo= Slay326"
         ];
-        extraGroups = ["networkmanager" "wheel" "input"];
+        extraGroups = ["networkmanager" "wheel" "input" "reyes"];
       };
     };
 
