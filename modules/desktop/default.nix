@@ -19,7 +19,6 @@ in {
     slay.home-manager.enable = true;
     slay.plasma.enable = true;
     slay.stylix.enable = true;
-    slay.vpn.enable = true;
     slay.yubikey.enable = true;
   };
 }
