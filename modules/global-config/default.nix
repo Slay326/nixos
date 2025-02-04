@@ -37,7 +37,7 @@ in {
           openssh.authorizedKeys.keys = [slay];
         };
 
-        slay = {
+        reyess = {
           isNormalUser = true;
           extraGroups = ["wheel reyess"];
           openssh.authorizedKeys.keys = [slay];
