@@ -1,9 +1,6 @@
 {
   imports = [
     ./common
-    ./modules/cleanup
-    ./modules/communication
-    ./modules/gaming
     ./modules/neovim
     ./modules/plasma
     ./modules/desktop.nix
@@ -16,8 +13,6 @@
     ./modules/shells.nix
     ./modules/ssh.nix
     ./modules/browsers.nix
-    ./modules/keepass.nix
-    ./modules/fun.nix
     ./modules/media-player.nix
     ./modules/code-editors.nix
   ];

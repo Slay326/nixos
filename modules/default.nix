@@ -9,6 +9,7 @@
     ./dotnet
     ./global-config
     ./hardware
+    ./fonts
     ./home-manager
     ./java
     ./latest-kernel
