@@ -7,7 +7,6 @@
     ./desktop
     ./docker
     ./dotnet
-    ./global-config
     ./hardware
     ./fonts
     ./home-manager
