@@ -27,7 +27,7 @@ in {
 
       polarity = "dark";
 
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/materia.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/purpledream.yaml";
 
       cursor = {
         name = "breeze_cursors";

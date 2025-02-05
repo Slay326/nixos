@@ -1,13 +1,13 @@
 {
   imports = [
-    ./adb
     ./basic-packages
+    ./bitwarden
     ./bootloader
     ./build-vm
     ./desktop
     ./docker
     ./dotnet
-    ./global-config
+    ./ghostty
     ./hardware
     ./fonts
     ./home-manager

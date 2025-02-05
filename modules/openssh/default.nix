@@ -19,5 +19,5 @@
     ];
   };
 
-  users.users.root.openssh.authorizedKeys.keys = config.slay.global-config.authorizedKeys;
+  #users.users.root.openssh.authorizedKeys.keys = config.slay.global-config.authorizedKeys;
 }

@@ -15,9 +15,9 @@
       core.autocrlf = false;
       credential.helper = "libsecret";
       rerere.enabled = true;
-      commit.gpgsign = true;
+      commit.gpgsign = false;
       gpg.format = "ssh";
-      user.signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
+      #user.signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
     };
 
     difftastic.enable = true;

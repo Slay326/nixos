@@ -19,7 +19,7 @@ in {
     # https://nixos.wiki/wiki/Jetbrains_Tools
     #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.rust-rover jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
     jetbrains-toolbox
   ];

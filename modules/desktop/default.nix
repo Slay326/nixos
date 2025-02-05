@@ -14,10 +14,12 @@ in {
   config = lib.mkIf cfg.enable {
     slay.bootloader.enable = true;
     slay.docker.enable = true;
-    #slay.fonts.enable = true;
-    #slay.home-manager.enable = true;
-    #slay.plasma.enable = true;
-    #slay.stylix.enable = true;
-    #slay.yubikey.enable = true;
+    slay.dotnet.enable = true;
+    slay.fonts.enable = true;
+    slay.java.enable = true;
+    slay.home-manager.enable = true;
+    slay.plasma.enable = true;
+    slay.stylix.enable = true;
+    slay.yubikey.enable = true;
   };
 }

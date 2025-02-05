@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin.url = "github:catppuccin/nix";
     colmena = {
       url = "github:zhaofengli/colmena";
       # current nixpkgs is not compatible
@@ -43,7 +44,7 @@
     };
 
     # Customization
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.11";
     nixvim.url = "github:nix-community/nixvim";
     plasma-manager = {
       url = "github:pjones/plasma-manager";
@@ -72,6 +73,7 @@
     flake-utils,
     colmena,
     agenix,
+    catppuccin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -108,13 +110,14 @@
       user = {
         username = "reyess";
         fullName = "Sleither Reyes";
-        email = "sleither.reyes@gmx.de";
+        email = "s.reyes@human.de";
+        isSystemUser = true;
         initialPassword = "password";
         authorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
           "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIB4aA4A1deXxm7i59Hb5S1gEygIluOLZluHnfGUWBVHUAAAABHNzaDo= Slay326"
         ];
-        extraGroups = ["networkmanager" "wheel" "input"];
+        extraGroups = ["networkmanager" "wheel" "input" "reyess" "docker"];
       };
     };
 
@@ -126,6 +129,7 @@
           inherit inputs outputs systemConfig;
         };
         modules = [
+          ./modules
           systemModule
         ];
       };

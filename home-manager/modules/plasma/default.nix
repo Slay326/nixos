@@ -40,6 +40,7 @@
                   "applications:org.kde.dolphin.desktop"
                   "applications:org.wezfurlong.wezterm.desktop"
                   "applications:brave-browser.desktop"
+                  "applications:jetbrains-rider.desktop"
                 ]
                 ++ extraConfig.additionalPinnedApps;
             };
