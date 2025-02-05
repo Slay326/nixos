@@ -105,17 +105,16 @@
       );
 
     defaultConfig = {
-      reyess = {
+      user = {
         username = "reyess";
-        createHome = true;
         fullName = "Sleither Reyes";
         email = "sleither.reyes@gmx.de";
-        password = "test";
+        initialPassword = "password";
         authorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
           "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIB4aA4A1deXxm7i59Hb5S1gEygIluOLZluHnfGUWBVHUAAAABHNzaDo= Slay326"
         ];
-        extraGroups = ["networkmanager" "wheel" "input" "reyess"];
+        extraGroups = ["networkmanager" "wheel" "input"];
       };
     };
 
@@ -127,7 +126,6 @@
           inherit inputs outputs systemConfig;
         };
         modules = [
-          ./modules
           systemModule
         ];
       };
@@ -142,7 +140,7 @@
     nixosConfigurations = {
       dell = mkSystem ./systems/dell/configuration.nix;
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
-
+      test = mkSystem ./systems/test/configuration.nix;
   };
   };
 }

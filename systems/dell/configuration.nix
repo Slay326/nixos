@@ -23,5 +23,6 @@
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
+  
   services.teamviewer.enable = true;
 }
