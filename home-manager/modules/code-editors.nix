@@ -9,7 +9,7 @@
     config.allowUnfree = true;
   };
 
-  jetbrains-plugins = ["github-copilot" "ideavim"];
+  jetbrains-plugins = ["ideavim"];
 in {
   home.packages = with pkgs; [
     # Editors

@@ -1,5 +1,4 @@
 {
-
   description = "Personal NixOS configuration.";
 
   inputs = {
@@ -145,6 +144,6 @@
       dell = mkSystem ./systems/dell/configuration.nix;
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
       test = mkSystem ./systems/test/configuration.nix;
-  };
+    };
   };
 }

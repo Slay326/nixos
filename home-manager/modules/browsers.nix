@@ -34,6 +34,10 @@ in {
         id = "dkoaabhijcomjinndlgbmfnmnjnmdeeb";
         updateUrl = "https://rednoise.org/adnauseam/updates.xml";
       }
+      # Bitwarden
+      {
+        id = "nngceckbapebfimnlniiiahkandclblb";
+      }
     ];
   };
 }

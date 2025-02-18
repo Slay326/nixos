@@ -1,16 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, systemConfig, ... }:
-
 {
-  imports =
-    [ 
-          inputs.nixos-hardware.nixosModules.common-pc-ssd
+  inputs,
+  config,
+  pkgs,
+  systemConfig,
+  ...
+}: {
+  imports = [
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
     inputs.nixos-hardware.nixosModules.dell-latitude-7430
-      ./hardware-configuration.nix
-    ];
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -35,19 +37,18 @@
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
-    security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.openssh = {
-  enable = true;
-  settings = {
-    PasswordAuthentication = false; # Nur SSH-Keys erlauben
-    PermitRootLogin = "no";         # Root-Login verhindern
+    enable = true;
+    settings = {
+      PasswordAuthentication = false; # Nur SSH-Keys erlauben
+      PermitRootLogin = "no"; # Root-Login verhindern
+    };
+    openFirewall = true; # Falls du eine Firewall nutzt, öffne Port 22
   };
-  openFirewall = true; # Falls du eine Firewall nutzt, öffne Port 22
-};
 
-  
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -79,6 +80,7 @@
     ];
   };
 
+  networking.resolvconf.dnsExtensionMechanism = false;
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -88,11 +90,17 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = ["user-with-access-to-virtualbox"];
+
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-	vscode
-	git
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    vscode
+    git
+    termius
+    spotify
+    colmena
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -121,5 +129,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

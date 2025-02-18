@@ -14,24 +14,7 @@
     addKeysToAgent = "yes";
     controlMaster = "auto";
     controlPersist = "60m";
-
-    # SSH hosts config
     matchBlocks = {
-      proxmox = {
-        hostname = "192.168.1.4";
-        user = "root";
-      };
-
-      "mail.meenzen.net" = {
-        hostname = "mail.meenzen.net";
-        user = "root";
-      };
-
-      "neon.mnzn.dev" = {
-        hostname = "neon.mnzn.dev";
-        user = "root";
-      };
-
       "ssh-gateway.human-dev.io" = {
         proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
       };
