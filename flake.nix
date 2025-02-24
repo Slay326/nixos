@@ -129,6 +129,7 @@
         };
         modules = [
           ./modules
+          ./modules
           systemModule
         ];
       };
