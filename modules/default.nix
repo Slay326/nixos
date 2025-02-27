@@ -4,11 +4,13 @@
     ./bitwarden
     ./bootloader
     ./build-vm
+    ./cloudflare-warp
     ./desktop
     ./docker
     ./dotnet
     ./ghostty
     ./hardware
+    ./hyprland
     ./fonts
     ./home-manager
     ./java

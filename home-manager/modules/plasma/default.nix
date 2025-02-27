@@ -41,6 +41,8 @@
                   "applications:org.wezfurlong.wezterm.desktop"
                   "applications:brave-browser.desktop"
                   "applications:rider.desktop"
+                  "applications:clion.desktop"
+                  "applications:firefox.desktop"
                 ]
                 ++ extraConfig.additionalPinnedApps;
             };

@@ -2,6 +2,11 @@
   description = "Personal NixOS configuration.";
 
   inputs = {
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
 
@@ -51,17 +56,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # Gaming
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    nix-citizen = {
-      url = "github:LovingMelody/nix-citizen";
-      inputs.nix-gaming.follows = "nix-gaming";
-    };
-    protontweaks = {
-      url = "github:rain-cafe/protontweaks/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Other Programs
     authentik-nix.url = "github:nix-community/authentik-nix";
   };
@@ -70,6 +64,7 @@
     self,
     nixpkgs,
     flake-utils,
+    hyprland,
     colmena,
     agenix,
     catppuccin,
@@ -125,10 +120,14 @@
     in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs outputs systemConfig;
+          inherit
+            inputs
+            hyprland
+            outputs
+            systemConfig
+            ;
         };
         modules = [
-          ./modules
           ./modules
           systemModule
         ];
@@ -142,7 +141,7 @@
     inherit (devShells) devShells;
 
     nixosConfigurations = {
-      dell = mkSystem ./systems/dell/configuration.nix;
+      nb-6462 = mkSystem ./systems/test/configuration.nix;
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
       test = mkSystem ./systems/test/configuration.nix;
     };

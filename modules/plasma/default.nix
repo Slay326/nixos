@@ -65,7 +65,7 @@ in {
       kdePackages.ghostwriter
       kdePackages.kdenlive
       krita
-      xwaylandvideobridge
+      kdePackages.xwaylandvideobridge
       xdg-utils
       qpwgraph
     ];
