@@ -10,7 +10,6 @@
     ./dotnet
     ./ghostty
     ./hardware
-    ./hyprland
     ./fonts
     ./home-manager
     ./java

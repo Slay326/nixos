@@ -2,11 +2,6 @@
   description = "Personal NixOS configuration.";
 
   inputs = {
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
 
@@ -58,19 +53,78 @@
 
     # Other Programs
     authentik-nix.url = "github:nix-community/authentik-nix";
+
+    # hyprwm
+    hyprland.url = "github:hyprwm/hyprland/nix-module";
+
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs = {
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
+    };
+
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+    };
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    hyprlock = {
+      url = "github:hyprwm/hyprlock";
+      inputs = {
+        hyprgraphics.follows = "hyprland/hyprgraphics";
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
+    };
+
+    hyprpaper = {
+      url = "github:hyprwm/hyprpaper";
+      inputs = {
+        hyprgraphics.follows = "hyprland/hyprgraphics";
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
     flake-utils,
-    hyprland,
     colmena,
     agenix,
     catppuccin,
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    supportedSystems = ["x86_64-linux" "aarch64-linux"];
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+    # Packages definieren
+    packages = forAllSystems (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      # wl-ocr einbinden - entweder als Dummy oder als richtiges Paket
+      wl-ocr = pkgs.writeShellScriptBin "wl-ocr" ''
+        #!/usr/bin/env bash
+        echo "OCR functionality"
+        exit 0
+      '';
+    });
 
     devShells =
       flake-utils.lib.eachDefaultSystem
@@ -122,14 +176,22 @@
         specialArgs = {
           inherit
             inputs
-            hyprland
             outputs
+            self
             systemConfig
             ;
         };
         modules = [
           ./modules
           systemModule
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs outputs self;};
+            };
+          }
         ];
       };
 
@@ -139,6 +201,7 @@
     };
   in {
     inherit (devShells) devShells;
+    inherit packages;
 
     nixosConfigurations = {
       nb-6462 = mkSystem ./systems/test/configuration.nix;

@@ -18,5 +18,6 @@
     ./modules/browsers.nix
     ./modules/media-player.nix
     ./modules/code-editors.nix
+    ./programs/wayland
   ];
 }

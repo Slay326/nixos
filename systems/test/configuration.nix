@@ -27,12 +27,10 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services = {
-    xserver = {
-      enable = true;
-      displayManager.sddm.wayland.enable = true;
-    };
-  };
+
+  services.xserver.displayManager.sessionPackages = [
+    inputs.hyprland.packages.${pkgs.system}.default
+  ];
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -43,7 +41,7 @@
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
-  slay.hyprland.enable = true;
+  #slay.hyprland.enable = true;
   slay.cloudflare-warp.enable = true;
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
@@ -92,7 +90,6 @@
 
   # Install firefox.
   programs.firefox.enable = true;
-  programs.hyprland.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -113,6 +110,20 @@
     colmena
     dbeaver-bin
   ];
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # XDG Portale - wichtig für Wayland-Integration
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+  };
 
   system.stateVersion = "24.11"; # Did you read the comment?
 }
