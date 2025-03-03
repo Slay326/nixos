@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+files=(
+  "$HOME/.gtkrc-2.0.backup"
+  "$HOME/.config/gtk-4.0/settings.ini.backup"
+  "$HOME/.config/gtk-4.0/gtk.css.backup"
+  "$HOME/.config/gtk-3.0/settings.ini.backup"
+  "$HOME/.config/gtk-3.0/gtk.css.backup"
+  "$HOME/.config/kdeglobals"
+)
+
+for file in "${files[@]}"; do
+  if [ -f "$file" ]; then
+    echo "Removing $file"
+    rm -f "$file"
+  fi
+done

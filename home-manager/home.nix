@@ -1,0 +1,23 @@
+{
+  imports = [
+    ./common
+    ./modules/communication
+    ./modules/neovim
+    ./modules/plasma
+    ./modules/desktop.nix
+    ./modules/dev-tools.nix
+    ./modules/system-tools.nix
+    ./modules/nix-tools.nix
+    ./modules/git.nix
+    ./modules/fun.nix
+    ./modules/ghostty.nix
+    ./modules/starship.nix
+    ./modules/wezterm.nix
+    ./modules/shells.nix
+    ./modules/ssh.nix
+    ./modules/browsers.nix
+    ./modules/media-player.nix
+    ./modules/code-editors.nix
+    ./programs/wayland
+  ];
+}

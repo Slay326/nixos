@@ -1,0 +1,31 @@
+{
+  imports = [
+    ./basic-packages
+    ./bitwarden
+    ./bootloader
+    ./build-vm
+    ./cloudflare-warp
+    ./desktop
+    ./docker
+    ./dotnet
+    ./ghostty
+    ./hardware
+    ./fonts
+    ./home-manager
+    ./java
+    ./latest-kernel
+    ./locale
+    ./nix
+    ./openssh
+    ./optimization
+    ./plasma
+    ./stylix
+    ./system-packages
+    ./system-packages
+    ./virtualbox
+    ./workarounds
+    ./wsl
+    ./yubikey
+    ./zsh
+  ];
+}
