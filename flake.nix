@@ -55,7 +55,7 @@
     authentik-nix.url = "github:nix-community/authentik-nix";
 
     # hyprwm
-    hyprland.url = "github:hyprwm/hyprland/nix-module";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     hypridle = {
       url = "github:hyprwm/hypridle";
@@ -159,7 +159,7 @@
         username = "reyess";
         fullName = "Sleither Reyes";
         email = "s.reyes@human.de";
-        isSystemUser = true;
+        isNormalUser = true;
         initialPassword = "password";
         authorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
@@ -207,6 +207,7 @@
       nb-6462 = mkSystem ./systems/test/configuration.nix;
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
       test = mkSystem ./systems/test/configuration.nix;
+      vm-desktop = mkSystem ./systems/vm-desktop/configuration.nix;
     };
   };
 }

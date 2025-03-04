@@ -21,7 +21,6 @@ in {
     (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
-    jetbrains-toolbox
   ];
 
   home.file.".ideavimrc".text = ''

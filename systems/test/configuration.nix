@@ -80,11 +80,13 @@
     openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
     description = "reyess";
     initialPassword = "test";
+    group = "${systemConfig.user.username}";
     extraGroups = systemConfig.user.extraGroups;
     packages = with pkgs; [
       kdePackages.kate
     ];
   };
+  users.groups.reyess = {};
 
   networking.resolvconf.dnsExtensionMechanism = false;
 
@@ -97,24 +99,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = ["user-with-access-to-virtualbox"];
+  users.extraGroups.vboxusers.members = ["reyess"];
 
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     vscode
     git
+    obsidian
     termius
     spotify
     desktop-file-utils
     colmena
     dbeaver-bin
   ];
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
 
   # XDG Portale - wichtig für Wayland-Integration
   xdg.portal = {

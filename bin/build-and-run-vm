@@ -16,10 +16,10 @@ alejandra . >/dev/null 2>&1
 
 print "==> Building VM"
 git add .
-nixos-rebuild build-vm --upgrade --verbose --flake .#vm
+nixos-rebuild build-vm --upgrade --verbose --flake .#vm-desktop
 
 print "==> Starting VM"
-./result/bin/run-vm-vm
+./result/bin/run-vm-desktop-vm
 
 echo "Do you want to delete the disk image? [y/N]"
 
@@ -30,4 +30,4 @@ if [ "$response" != "y" ]; then
 fi
 
 print "==> Deleting Disk Image"
-rm -f vm.qcow2
+rm -f vm-desktop.qcow2
