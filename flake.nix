@@ -8,6 +8,7 @@
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-compat.url = "github:edolstra/flake-compat";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +55,7 @@
     # Other Programs
     authentik-nix.url = "github:nix-community/authentik-nix";
 
-    # hyprwm
+    # Hyprland und zugehörige Pakete
     hyprland.url = "github:hyprwm/Hyprland";
 
     hypridle = {

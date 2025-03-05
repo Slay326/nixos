@@ -2,6 +2,8 @@
   imports = [
     ./common
     ./modules/communication
+    ./modules/var
+    ./modules/catpuccin
     ./modules/neovim
     ./modules/plasma
     ./modules/desktop.nix
@@ -18,5 +20,6 @@
     ./modules/browsers.nix
     ./modules/media-player.nix
     ./modules/code-editors.nix
+    ./modules/hyprland
   ];
 }

@@ -23,10 +23,20 @@
     extraGroups = ["wheel" "networkmanager" "input" "docker"];
   };
 
+  slay.home-manager = {
+    enable = true;
+    homeModule = "${inputs.self}/home-manager/home.nix";
+  };
+
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    xwayland.enable = true;
   };
+
+  # Optional, für zusätzliche Funktionen:
+  environment.systemPackages = with pkgs; [
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
+  ];
 }
