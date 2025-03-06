@@ -108,6 +108,7 @@
     desktop-file-utils
     colmena
     dbeaver-bin
+    cinny-desktop
   ];
 
   # XDG Portale - wichtig für Wayland-Integration

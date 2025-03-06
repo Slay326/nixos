@@ -18,13 +18,13 @@
   users.groups.${systemConfig.user.username} = {};
   users.users.${systemConfig.user.username} = {
     isNormalUser = true;
-    initialPassword = "password";
+    initialPassword = "test";
     description = "Tester";
     extraGroups = ["wheel" "networkmanager" "input" "docker"];
   };
 
   slay.home-manager = {
-    enable = true;
+    enable = false;
     homeModule = "${inputs.self}/home-manager/home.nix";
   };
 
@@ -34,7 +34,6 @@
     xwayland.enable = true;
   };
 
-  # Optional, für zusätzliche Funktionen:
   environment.systemPackages = with pkgs; [
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
