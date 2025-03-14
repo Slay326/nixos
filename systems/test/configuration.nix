@@ -109,6 +109,7 @@
     colmena
     dbeaver-bin
     cinny-desktop
+    terraform
   ];
 
   # XDG Portale - wichtig für Wayland-Integration

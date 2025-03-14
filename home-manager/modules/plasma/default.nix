@@ -43,6 +43,7 @@
                   "applications:rider.desktop"
                   "applications:clion.desktop"
                   "applications:firefox.desktop"
+                  "applications:obsidian.desktop"
                 ]
                 ++ extraConfig.additionalPinnedApps;
             };
