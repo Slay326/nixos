@@ -110,6 +110,7 @@
     dbeaver-bin
     cinny-desktop
     terraform
+    qemu
   ];
 
   # XDG Portale - wichtig für Wayland-Integration

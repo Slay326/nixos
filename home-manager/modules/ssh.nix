@@ -15,79 +15,26 @@
     controlMaster = "auto";
     controlPersist = "60m";
     matchBlocks = {
-      "ssh-gateway.human-dev.io" = {
-        proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
+      # Proxmox Virtual Environment
+      andromeda = {
+        user = "root";
+        hostname = "138.201.57.80";
       };
-
-      # Document Library
-      postnotes01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.26";
-        proxyJump = "ssh-gateway.human-dev.io";
+      mercury = lib.hm.dag.entryAfter ["andromeda"] {
+        hostname = "10.0.0.10";
+        proxyJump = "andromeda";
+        user = "root";
       };
-
-      # GitLab Runner, cloudflared
-      smn_01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.211";
-        proxyJump = "ssh-gateway.human-dev.io";
+      silicon = lib.hm.dag.entryAfter ["andromeda"] {
+        hostname = "10.0.0.20";
+        proxyJump = "andromeda";
+        user = "root";
       };
-
-      # osTicket
-      smn_02 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.212";
-        proxyJump = "ssh-gateway.human-dev.io";
+      voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
+        hostname = "10.0.0.21";
+        proxyJump = "andromeda";
+        user = "root";
       };
-
-      hpcredux = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.214";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      hpcredux_dev = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.215";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      reflector_dev = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.220";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      reflector_prod = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.224";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      # doku.human2.de
-      nginx_static = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.216";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      nginx_pisa_01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "192.168.155.11";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      # webmonitor
-      webmonitor = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.217";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      # stirling-pdf
-      docker01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.48";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      helabftw1 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.16.0.15";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      "git.human.de".hostname = "git.human.de";
-      "sentry.human.de".hostname = "167.235.55.186";
-      "nix-01.human-dev.io".user = "root";
     };
   };
 }
