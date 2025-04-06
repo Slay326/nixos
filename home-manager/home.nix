@@ -1,7 +1,7 @@
 {
   imports = [
     ./common
-    ./desktop
+    #./desktop
     ./modules/communication
     ./modules/catpuccin
     ./modules/neovim

@@ -10,13 +10,17 @@
   home.packages = with pkgs; [
     htop
     curl
-
   ];
 
-    home.sessionVariables = {
-PATH = "/opt/homebrew/bin/ssh:" + (if builtins.getEnv "PATH" == null then "" else builtins.getEnv "PATH");
+  home.sessionVariables = {
+    PATH =
+      "/opt/homebrew/bin/ssh:"
+      + (
+        if builtins.getEnv "PATH" == null
+        then ""
+        else builtins.getEnv "PATH"
+      );
   };
-
 
   programs.ssh = {
     enable = true;
