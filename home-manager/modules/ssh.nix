@@ -4,7 +4,7 @@
   ...
 }: {
   # cloudflared is required for tunneling through Cloudflare Zero Trust
-  home.packages = [pkgs.cloudflared];
+  #home.packages = [pkgs.cloudflared];
 
   services.ssh-agent.enable = true;
 
@@ -19,6 +19,7 @@
       andromeda = {
         user = "root";
         hostname = "138.201.57.80";
+        port = 2222;
       };
       mercury = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.10";
