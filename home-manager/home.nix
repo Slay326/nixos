@@ -1,9 +1,9 @@
 {
   imports = [
     ./common
-    #./desktop
+    ./desktop
     ./modules/communication
-    #./modules/catpuccin
+    ./modules/catpuccin
     ./modules/neovim
     ./modules/plasma
     ./modules/desktop.nix

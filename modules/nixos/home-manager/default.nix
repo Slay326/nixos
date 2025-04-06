@@ -3,10 +3,18 @@
   lib,
   inputs,
   outputs,
+  pkgs,
   systemConfig,
   ...
-}: let
+} @ args: let
+  # Hole den Systemwert aus den übergebenen extraSpecialArgs:
+  currentSystem = args.system;
   cfg = config.slay.home-manager;
+  isDarwin = builtins.elem currentSystem ["aarch64-darwin" "x86_64-darwin"];
+  homeManagerModule =
+    if isDarwin
+    then inputs.home-manager.darwinModules.home-manager
+    else inputs.home-manager.nixosModules.home-manager;
 in {
   options.slay.home-manager = {
     enable = lib.mkEnableOption "Enable Home Manager";
@@ -35,15 +43,14 @@ in {
       };
   };
 
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-  ];
+  imports = [homeManagerModule];
 
   config = lib.mkIf cfg.enable {
     home-manager = {
       extraSpecialArgs = {
         inherit inputs outputs systemConfig;
         extraConfig = cfg.extraConfig;
+        utils = lib;
       };
       useGlobalPkgs = true;
       useUserPackages = true;
