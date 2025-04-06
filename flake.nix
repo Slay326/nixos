@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -29,7 +31,6 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.darwin.follows = "";
     };
 
     disko = {
@@ -99,6 +100,17 @@
         systems.follows = "hyprland/systems";
       };
     };
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -108,6 +120,9 @@
     colmena,
     agenix,
     catppuccin,
+    nix-darwin,
+    nix-homebrew,
+    home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -115,11 +130,10 @@
     supportedSystems = ["x86_64-linux" "aarch64-linux"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-    # Packages definieren
     packages = forAllSystems (system: let
       pkgs = import nixpkgs {inherit system;};
     in {
-      # wl-ocr einbinden - entweder als Dummy oder als richtiges Paket
+      # wl-ocr dummy
       wl-ocr = pkgs.writeShellScriptBin "wl-ocr" ''
         #!/usr/bin/env bash
         echo "OCR functionality"
@@ -155,7 +169,7 @@
         }
       );
 
-    defaultConfig = {
+    nixosConfig = {
       user = {
         username = "reyess";
         fullName = "Sleither Reyes";
@@ -170,8 +184,20 @@
       };
     };
 
+    darwinConfig = {
+      user = {
+        username = "og326";
+        fullName = "Sleither Reyes";
+        email = "sleither.reyes@gmx.de";
+        authorizedKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
+          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIB4aA4A1deXxm7i59Hb5S1gEygIluOLZluHnfGUWBVHUAAAABHNzaDo= Slay326"
+        ];
+      };
+    };
+
     mkSystem = systemModule: let
-      systemConfig = defaultConfig;
+      systemConfig = nixosConfig;
     in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -183,7 +209,7 @@
             ;
         };
         modules = [
-          ./modules
+          ./modules/nixos
           systemModule
           inputs.home-manager.nixosModules.home-manager
           {
@@ -200,6 +226,43 @@
       deployment.targetHost = targetHost;
       imports = [systemModule];
     };
+
+    mkDarwin = systemModule: let
+      systemConfig = darwinConfig;
+    in
+      nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {
+          system = "aarch64-darwin";
+          inherit
+            inputs
+            outputs
+            self
+            systemConfig
+            ;
+        };
+        modules = [
+          systemModule
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs outputs self;};
+              users."og326" = import ./modules/darwin/home.nix;
+            };
+          }
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "og326";
+              autoMigrate = true;
+            };
+          }
+        ];
+      };
   in {
     inherit (devShells) devShells;
     inherit packages;
@@ -209,6 +272,10 @@
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
       test = mkSystem ./systems/test/configuration.nix;
       vm-desktop = mkSystem ./systems/vm-desktop/configuration.nix;
+    };
+
+    darwinConfigurations = {
+      onyx = mkDarwin ./systems/onyx/darwin-configuration.nix;
     };
   };
 }

@@ -21,7 +21,6 @@
     ./plasma
     ./stylix
     ./system-packages
-    ./system-packages
     ./virtualbox
     ./workarounds
     ./wsl
