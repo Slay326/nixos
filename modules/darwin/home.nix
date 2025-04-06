@@ -56,7 +56,7 @@
  programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "SLeither Reyes";
+    userName = "Sleither Reyes";
     userEmail = "sleither.reyes@gmx.de";
     lfs.enable = true;
     extraConfig = {
