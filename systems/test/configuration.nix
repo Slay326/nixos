@@ -38,7 +38,7 @@
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
   #slay.hyprland.enable = true;
-  slay.cloudflare-warp.enable = true;
+  slay.cloudflare-warp.enable = false;
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
   services.printing.enable = true;
