@@ -10,17 +10,30 @@
   home.packages = with pkgs; [
     htop
     curl
+    wezterm
   ];
 
+  #home.sessionVariables = {
+  #  PATH = 
+  #    "/opt/homebrew/bin/ssh:"
+  #    #"/opt/homebrew/bin/git:"
+  #    + (
+  #      if builtins.getEnv "PATH" == null
+  #      then ""
+  #      else builtins.getEnv "PATH"
+  #    );
+  #};
+
   home.sessionVariables = {
-    PATH =
-      "/opt/homebrew/bin/ssh:"
-      + (
-        if builtins.getEnv "PATH" == null
-        then ""
-        else builtins.getEnv "PATH"
-      );
+SSH_AUTH_SOCK = "~/.ssh/agent"; 
+#SSH_ASKPASS = "ssh-askpass";
+#SSH_ASKPASS_REQUIRE = "force";
   };
+
+    home.sessionPath = [
+    "/opt/homebrew/bin/ssh"
+    #"/opt/homebrew/bin/git"
+  ];
 
   programs.ssh = {
     enable = true;
@@ -62,10 +75,10 @@
     extraConfig = {
       init.defaultBranch = "master";
       core.autocrlf = false;
-      credential.helper = "libsecret";
+      credential.helper = "osxkeychain";
       rerere.enabled = true;
       commit.gpgsign = false;
-      gpg.format = "ssh";
+      #gpg.format = "ssh";
       #user.signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
     };
 
