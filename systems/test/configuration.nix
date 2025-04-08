@@ -42,6 +42,7 @@
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
   services.openssh = {
     enable = true;
     settings = {
@@ -100,7 +101,6 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
-    vscode
     git
     obsidian
     termius

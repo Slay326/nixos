@@ -23,6 +23,21 @@ in {
     (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
   ];
 
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      mkhl.direnv
+      editorconfig.editorconfig
+      eamodio.gitlens
+      hashicorp.terraform
+      bbenoist.nix
+      arrterian.nix-env-selector
+      #pinage404.nix-extension-pack
+      jnoortheen.nix-ide
+      #vscodevim.vim
+    ];
+  };
+
   home.file.".ideavimrc".text = ''
     " .ideavimrc is a configuration file for IdeaVim plugin. It uses
     "   the same commands as the original .vimrc configuration.

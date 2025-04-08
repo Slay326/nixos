@@ -14,7 +14,7 @@
   ];
 
   #home.sessionVariables = {
-  #  PATH = 
+  #  PATH =
   #    "/opt/homebrew/bin/ssh:"
   #    #"/opt/homebrew/bin/git:"
   #    + (
@@ -25,12 +25,12 @@
   #};
 
   home.sessionVariables = {
-SSH_AUTH_SOCK = "~/.ssh/agent"; 
-#SSH_ASKPASS = "ssh-askpass";
-#SSH_ASKPASS_REQUIRE = "force";
+    SSH_AUTH_SOCK = "~/.ssh/agent";
+    #SSH_ASKPASS = "ssh-askpass";
+    #SSH_ASKPASS_REQUIRE = "force";
   };
 
-    home.sessionPath = [
+  home.sessionPath = [
     "/opt/homebrew/bin/ssh"
     #"/opt/homebrew/bin/git"
   ];
@@ -66,7 +66,7 @@ SSH_AUTH_SOCK = "~/.ssh/agent";
     };
   };
 
- programs.git = {
+  programs.git = {
     enable = true;
     package = pkgs.gitFull;
     userName = "Sleither Reyes";
@@ -84,5 +84,4 @@ SSH_AUTH_SOCK = "~/.ssh/agent";
 
     difftastic.enable = true;
   };
-
 }

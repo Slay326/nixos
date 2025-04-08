@@ -11,6 +11,7 @@
     ./modules/system-tools.nix
     ./modules/nix-tools.nix
     ./modules/git.nix
+    ./modules/gpg.nix
     ./modules/fun.nix
     ./modules/ghostty.nix
     ./modules/starship.nix

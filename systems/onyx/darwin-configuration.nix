@@ -80,28 +80,28 @@
 
   #system
   system = {
-  stateVersion = 4;
+    stateVersion = 4;
 
-  defaults = {
-    # minimal dock
-    dock = {
-      autohide = true;
-      orientation = "bottom";
-      show-process-indicators = true;
-      show-recents = false;
-      static-only = true;
+    defaults = {
+      # minimal dock
+      dock = {
+        autohide = true;
+        orientation = "bottom";
+        show-process-indicators = true;
+        show-recents = false;
+        static-only = true;
+      };
+      # a finder that tells me what I want to know and lets me work
+      finder = {
+        AppleShowAllExtensions = true;
+        ShowPathbar = true;
+        FXEnableExtensionChangeWarning = false;
+      };
+      # Tab between form controls and F-row that behaves as F1-F12
+      NSGlobalDomain = {
+        AppleKeyboardUIMode = 3;
+        "com.apple.keyboard.fnState" = true;
+      };
     };
-    # a finder that tells me what I want to know and lets me work
-    finder = {
-      AppleShowAllExtensions = true;
-      ShowPathbar = true;
-      FXEnableExtensionChangeWarning = false;
-    };
-    # Tab between form controls and F-row that behaves as F1-F12
-    NSGlobalDomain = {
-      AppleKeyboardUIMode = 3;
-      "com.apple.keyboard.fnState" = true;
-    };
-  };
   };
 }
