@@ -24,7 +24,7 @@ in {
   ];
 
   programs.vscode = {
-    enable = true;
+    enable = false;
     extensions = with pkgs.vscode-extensions; [
       mkhl.direnv
       editorconfig.editorconfig
@@ -32,9 +32,7 @@ in {
       hashicorp.terraform
       bbenoist.nix
       arrterian.nix-env-selector
-      #pinage404.nix-extension-pack
       jnoortheen.nix-ide
-      #vscodevim.vim
     ];
   };
 
