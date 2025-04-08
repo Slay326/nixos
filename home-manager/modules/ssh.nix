@@ -4,7 +4,7 @@
   ...
 }: {
   # cloudflared is required for tunneling through Cloudflare Zero Trust
-  #home.packages = [pkgs.cloudflared];
+  home.packages = [pkgs.cloudflared];
 
   services.ssh-agent.enable = true;
 
