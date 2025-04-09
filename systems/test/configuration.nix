@@ -39,6 +39,7 @@
   slay.hardware.esp32.enable = true;
   #slay.hyprland.enable = true;
   slay.cloudflare-warp.enable = false;
+  slay.yubikey.enable = true;
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
   services.printing.enable = true;

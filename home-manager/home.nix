@@ -3,6 +3,7 @@
     ./common
     #./desktop
     ./modules/communication
+    ./modules/cleanup
     ./modules/catpuccin
     ./modules/neovim
     ./modules/plasma

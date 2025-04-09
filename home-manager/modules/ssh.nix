@@ -1,4 +1,6 @@
 {
+  configVars,
+  configLib,
   lib,
   pkgs,
   ...

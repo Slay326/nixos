@@ -18,10 +18,11 @@ in {
 
     # Smartcard support
     services.pcscd.enable = true;
-
     # Management GUI
     environment.systemPackages = with pkgs; [
       yubioath-flutter
+      yubikey-manager
+      pam_u2f
     ];
   };
 }
