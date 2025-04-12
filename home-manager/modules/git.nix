@@ -18,7 +18,7 @@
       commit.gpgsign = true;
       gpg.format = "ssh";
       user.signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk.pub";
-      gpg.ssh.allowedSignersFile = "/home/${systemConfig.user.username}/.ssh/allowed_signers";
+      #gpg.ssh.allowedSignersFile = "/home/${systemConfig.user.username}/.ssh/allowed_signers";
     };
 
     difftastic.enable = true;
