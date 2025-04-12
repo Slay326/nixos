@@ -46,5 +46,6 @@ in {
     tokei
     difftastic
     terraform
+    xclip
   ];
 }
