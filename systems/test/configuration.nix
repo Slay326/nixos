@@ -37,8 +37,9 @@
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
+  slay.ghostty.enable = false;
   #slay.hyprland.enable = true;
-  slay.cloudflare-warp.enable = false;
+  slay.cloudflare-warp.enable = true;
   slay.yubikey.enable = true;
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
@@ -100,9 +101,8 @@
   users.extraGroups.vboxusers.members = ["reyess"];
 
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
     git
+    kdePackages.ksshaskpass
     obsidian
     termius
     spotify
@@ -114,7 +114,10 @@
     qemu
   ];
 
-  # XDG Portale - wichtig für Wayland-Integration
+  environment.variables = {
+    SSH_ASKPASS_REQUIRE = "prefer";
+  };
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
@@ -123,5 +126,5 @@
     ];
   };
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11";
 }
