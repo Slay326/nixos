@@ -20,9 +20,9 @@ in {
       enable = true;
 
       image = pkgs.fetchurl {
-        name = "PlasmaDark.jpg";
-        url = "https://invent.kde.org/plasma/breeze/-/raw/Plasma/6.1/wallpapers/Next/contents/images_dark/base_size.png?ref_type=heads&inline=false";
-        sha256 = "sha256-sirjorAnLH4gvP94lXUtPL6iaVP/eaAxz0hIcvQKn+w=";
+        name = "LilEarth.jpg";
+        url = "https://i.redd.it/i1ong1fwrvoe1.png";
+        sha256 = "sha256-yuORQ0DbGgylQwp54x7fU5XG1pYEzWFcRrn15P/Ms8E=";
       };
 
       polarity = "dark";
