@@ -11,7 +11,6 @@
   programs.ssh = {
     enable = true;
     compression = true;
-    #startAgent = true;
     addKeysToAgent = "yes";
     controlMaster = "auto";
     controlPersist = "60m";
@@ -31,16 +30,19 @@
         hostname = "10.0.0.10";
         proxyJump = "andromeda";
         user = "root";
+        identitiesOnly = true;
       };
       silicon = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.20";
         proxyJump = "andromeda";
         user = "root";
+        identitiesOnly = true;
       };
       voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.21";
         proxyJump = "andromeda";
         user = "root";
+        identitiesOnly = true;
       };
     };
   };
