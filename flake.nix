@@ -178,8 +178,7 @@
         initialPassword = "password";
         authorizedKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
-          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIB4aA4A1deXxm7i59Hb5S1gEygIluOLZluHnfGUWBVHUAAAABHNzaDo= Slay326" #Maybe remove this
-          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICKXQxIZdFAYE0kDI/73H7vWZJWsVCgY+R7OPeNbfD9zAAAABHNzaDo= ssh:"
+          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIO/x3ZqJPZ2M01almriEhk30UM/Qjo3PKTcKpr8XM12AAAAABHNzaDo= YubiKey 5C 1st"
         ];
         extraGroups = ["networkmanager" "wheel" "input" "reyess" "docker"];
       };
