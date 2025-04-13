@@ -25,9 +25,6 @@
   networking.networkmanager.enable = true;
   home-manager.backupFileExtension = "backup";
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
