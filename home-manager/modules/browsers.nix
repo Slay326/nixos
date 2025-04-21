@@ -14,6 +14,7 @@ in {
     (google-chrome.override {
       commandLineArgs = args;
     })
+    # TODO: add firefox extensions from brave
 
     # microsoft-edge # edge is totally borked right now
   ];

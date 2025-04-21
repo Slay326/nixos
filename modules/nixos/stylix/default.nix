@@ -47,7 +47,7 @@ in {
 
         # serif fonts suck, just force them to sans-serif
         # ¯\_(ツ)_/¯
-        serif = sansSerif;
+        #serif = sansSerif;
 
         sizes = let
           default = 10;

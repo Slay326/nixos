@@ -98,10 +98,10 @@
         FXEnableExtensionChangeWarning = false;
       };
       # Tab between form controls and F-row that behaves as F1-F12
-      NSGlobalDomain = {
-        AppleKeyboardUIMode = 3;
-        "com.apple.keyboard.fnState" = true;
-      };
+      #NSGlobalDomain = {
+      #  AppleKeyboardUIMode = 3;
+      #  "com.apple.keyboard.fnState" = true;
+      #};
     };
   };
 }
