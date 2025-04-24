@@ -3,7 +3,7 @@
   pkgs,
   lib,
   ...
-}: let 
+}: let
   args = [
     "--enable-features=UseOzonePlatform"
     "--ozone-platform=wayland"
@@ -11,17 +11,21 @@
     "--enable-zero-copy"
     "--enable-features=VaapiVideoDecodeLinuxGL"
   ];
-  in {
+  jetbrains-plugins = ["ideavim"];
+in {
   home.username = "og326";
   home.homeDirectory = "/Users/og326";
 
   home.packages = with pkgs; [
     htop
     curl
-        (google-chrome.override {
+    (google-chrome.override {
       commandLineArgs = args;
     })
     firefox
+    (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
     nerd-fonts.jetbrains-mono
   ];
 
@@ -123,27 +127,25 @@
   programs.wezterm = {
     enable = true;
     enableZshIntegration = true;
-      extraConfig = ''
-    return {
-      font = wezterm.font("JetBrainsMono Nerd Font"),
-      font_size = 14.0,
-      hide_tab_bar_if_only_one_tab = true,
-    }
-  '';
+    extraConfig = ''
+      return {
+        font = wezterm.font("JetBrainsMono Nerd Font"),
+        font_size = 14.0,
+        hide_tab_bar_if_only_one_tab = true,
+      }
+    '';
   };
-
 
   programs.vscode = {
-  enable = true;
-  profiles = {
-    default = {
-  userSettings = {
-    "editor.fontFamily" = "JetBrainsMono Nerd Font";
-  };
-
+    enable = true;
+    profiles = {
+      default = {
+        userSettings = {
+          "editor.fontFamily" = "JetBrainsMono Nerd Font";
+        };
+      };
     };
   };
-};
 
   programs.starship = {
     enable = true;
@@ -278,5 +280,4 @@
       zig.format = ''\[[$symbol($version)]($style)\]'';
     };
   };
-
 }
