@@ -18,7 +18,6 @@ in {
     enable = true;
     brews = [
       "git"
-     
     ];
     casks = pkgs.callPackage ./casks.nix {};
     masApps = {
