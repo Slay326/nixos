@@ -26,6 +26,7 @@ in {
     (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
+
     nerd-fonts.jetbrains-mono
   ];
 
@@ -79,6 +80,10 @@ in {
         proxyJump = "andromeda";
         user = "root";
       };
+      quartz = {
+        user = "sleit";
+        hostname = "192.168.2.35";
+      };
     };
   };
 
@@ -91,7 +96,7 @@ in {
     extraConfig = {
       init.defaultBranch = "master";
       core.autocrlf = false;
-      credential.helper = "libsecret";
+      credential.helper = "osxkeychain";
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
@@ -142,6 +147,8 @@ in {
       default = {
         userSettings = {
           "editor.fontFamily" = "JetBrainsMono Nerd Font";
+          "git.confirmSync" =  false;
+          "git.enableCommitSigning" = true;
         };
       };
     };
