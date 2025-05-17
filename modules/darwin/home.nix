@@ -25,7 +25,7 @@ in {
     firefox
     (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
     nerd-fonts.jetbrains-mono
   ];
 
