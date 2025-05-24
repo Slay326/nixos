@@ -109,6 +109,10 @@
     cinny-desktop
     terraform
     qemu
+    wget
+    unzip
+    coreutils
+    wireguard-ui
   ];
 
   environment.variables = {
