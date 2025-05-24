@@ -25,15 +25,17 @@ in {
 
   programs.vscode = {
     enable = false;
-    extensions = with pkgs.vscode-extensions; [
-      mkhl.direnv
-      editorconfig.editorconfig
-      eamodio.gitlens
-      hashicorp.terraform
-      bbenoist.nix
-      arrterian.nix-env-selector
-      jnoortheen.nix-ide
-    ];
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        mkhl.direnv
+        editorconfig.editorconfig
+        eamodio.gitlens
+        hashicorp.terraform
+        bbenoist.nix
+        arrterian.nix-env-selector
+        jnoortheen.nix-ide
+      ];
+    };
   };
 
   home.file.".ideavimrc".text = ''
