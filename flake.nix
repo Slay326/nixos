@@ -45,7 +45,11 @@
     };
 
     # Customization
-    stylix.url = "github:danth/stylix/release-24.11";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     nixvim.url = "github:nix-community/nixvim";
     plasma-manager = {
       url = "github:pjones/plasma-manager";
