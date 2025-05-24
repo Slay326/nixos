@@ -44,6 +44,11 @@
         user = "root";
         identitiesOnly = true;
       };
+      windows-slave = {
+        hostname = "192.168.2.47";
+        user = "administrator";
+        identitiesOnly = true;
+      };
     };
   };
 }
