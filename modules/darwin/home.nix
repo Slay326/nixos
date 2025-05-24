@@ -147,12 +147,11 @@ in {
       default = {
         userSettings = {
           "editor.fontFamily" = "JetBrainsMono Nerd Font";
-          "git.confirmSync" =  false;
+          "git.confirmSync" = false;
           "git.enableCommitSigning" = true;
           "explorer.confirmDragAndDrop" = false;
-            "terminal.integrated.enableMultiLinePasteWarning" = "never";
-            "application.shellEnvironmentResolutionTimeout" =  20;
-
+          "terminal.integrated.enableMultiLinePasteWarning" = "never";
+          "application.shellEnvironmentResolutionTimeout" = 20;
         };
       };
     };
