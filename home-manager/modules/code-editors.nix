@@ -15,7 +15,7 @@ in {
     # Editors
     vscode
     kdePackages.kate
-
+    jetbrains-toolbox
     # https://nixos.wiki/wiki/Jetbrains_Tools
     #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
