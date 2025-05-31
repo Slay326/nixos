@@ -5,6 +5,7 @@
     ./bootloader
     ./build-vm
     ./cloudflare-warp
+    ./cleanup
     ./desktop
     ./docker
     ./dotnet

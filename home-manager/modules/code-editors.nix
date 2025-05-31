@@ -34,6 +34,9 @@ in {
         bbenoist.nix
         arrterian.nix-env-selector
         jnoortheen.nix-ide
+        #alefragnani.pascal
+        pinage404.nix-extension-pack
+        jnoortheen.nix-ide
       ];
     };
   };
