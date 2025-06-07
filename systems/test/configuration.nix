@@ -37,6 +37,7 @@
   slay.ghostty.enable = false;
   #slay.hyprland.enable = true;
   slay.cloudflare-warp.enable = true;
+  slay.vpn.enable = true;
   slay.yubikey.enable = true;
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
@@ -108,6 +109,8 @@
     dbeaver-bin
     cinny-desktop
     terraform
+    opentofu
+    opentofu-ls
     qemu
     wget
     unzip

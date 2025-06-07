@@ -23,6 +23,7 @@
     ./stylix
     ./system-packages
     ./virtualbox
+    ./vpn
     ./workarounds
     ./wsl
     ./yubikey

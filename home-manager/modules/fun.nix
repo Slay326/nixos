@@ -10,6 +10,4 @@
     sl
     bb
   ];
-
-  programs.thefuck.enable = true;
 }

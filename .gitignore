@@ -2,3 +2,4 @@
 result
 result/
 *.qcow2
+/home/reyess/dev/human/reflector/src/Human.Reflector.Api/Features/ZollData/ZollDataPackstückRecord.cs

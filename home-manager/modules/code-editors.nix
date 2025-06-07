@@ -10,6 +10,59 @@
   };
 
   jetbrains-plugins = ["ideavim"];
+  vscodeCustomExtensionsList = [
+    {
+      name = "pascal";
+      publisher = "alefragnani";
+      version = "9.9.0";
+      sha256 = "sha256-qXBSvE8HVfKOkU9l1mxiQiWguQkI8PNBDgGRKO41GSI=";
+    }
+    {
+      name = "nix-extension-pack";
+      publisher = "pinage404";
+      version = "3.0.0";
+      sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
+    }
+    {
+      name = "opentofu";
+      publisher = "gamunu";
+      version = "0.2.1";
+      sha256 = "OizdHTSGuwBRuD/qPXjmna6kZWfRp9EimhcFk3ICN9I=";
+    }
+    {
+      name = "latex-formatter";
+      publisher = "nickfode";
+      version = "1.0.5";
+      sha256 = "JzctJW0/rCEFbNxeGh/chLE4LU/oydW3QKdAxgj64v8=";
+    }
+    {
+      name = "vscode-typescript-next";
+      publisher = "ms-vscode";
+      version = "5.9.20250601";
+      sha256 = "OAFZFfxww6rWMj9Rfa7XMru91otNnlI8k9ttSfqW15A=";
+    }
+  ];
+  vscodeCustomExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace vscodeCustomExtensionsList;
+
+  vscodeStandardExtensions = with pkgs.vscode-extensions; [
+    mkhl.direnv
+    editorconfig.editorconfig
+    eamodio.gitlens
+    hashicorp.terraform
+    bbenoist.nix
+    arrterian.nix-env-selector
+    jnoortheen.nix-ide
+    ms-azuretools.vscode-docker
+    christian-kohler.npm-intellisense
+    esbenp.prettier-vscode
+    hashicorp.terraform
+    #ms-vscode.vscode-typescript-next
+    angular.ng-template
+    svelte.svelte-vscode
+    yzhang.markdown-all-in-one
+  ];
+
+  additionalExtensions = [];
 in {
   home.packages = with pkgs; [
     # Editors
@@ -17,27 +70,25 @@ in {
     kdePackages.kate
     jetbrains-toolbox
     # https://nixos.wiki/wiki/Jetbrains_Tools
-    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
   ];
 
   programs.vscode = {
-    enable = false;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        mkhl.direnv
-        editorconfig.editorconfig
-        eamodio.gitlens
-        hashicorp.terraform
-        bbenoist.nix
-        arrterian.nix-env-selector
-        jnoortheen.nix-ide
-        #alefragnani.pascal
-        pinage404.nix-extension-pack
-        jnoortheen.nix-ide
-      ];
+    enable = true;
+    profiles = {
+      default = {
+        userSettings = {
+          "editor.fontFamily" = "JetBrainsMono Nerd Font";
+          "git.confirmSync" = false;
+          "git.enableCommitSigning" = true;
+          "explorer.confirmDragAndDrop" = false;
+          "terminal.integrated.enableMultiLinePasteWarning" = "never";
+          "application.shellEnvironmentResolutionTimeout" = 20;
+        };
+        extensions = vscodeStandardExtensions ++ vscodeCustomExtensions ++ additionalExtensions;
+      };
     };
   };
 
