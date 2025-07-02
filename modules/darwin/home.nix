@@ -100,7 +100,7 @@ in {
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
-      user.signingkey = "/Users/og326/.ssh/id_ed25519_sk";
+      user.signingkey = "/Users/og326/.ssh/id_ed25519";
     };
 
     difftastic.enable = true;
