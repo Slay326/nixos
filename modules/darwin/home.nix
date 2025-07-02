@@ -30,16 +30,6 @@ in {
     nerd-fonts.jetbrains-mono
   ];
 
-  #home.sessionVariables = {
-  #  PATH =
-  #    "/opt/homebrew/bin/ssh:"
-  #    #"/opt/homebrew/bin/git:"
-  #    + (
-  #      if builtins.getEnv "PATH" == null
-  #      then ""
-  #      else builtins.getEnv "PATH"
-  #    );
-  #};
 
   home.sessionVariables = {
     SSH_AUTH_SOCK = "~/.ssh/agent";
@@ -80,6 +70,16 @@ in {
         proxyJump = "andromeda";
         user = "root";
       };
+            atlas = lib.hm.dag.entryAfter ["andromeda"] {
+        hostname = "10.0.0.30";
+        proxyJump = "andromeda";
+        user = "root";
+      };
+            phoenix = lib.hm.dag.entryAfter ["andromeda"] {
+        hostname = "10.0.0.31";
+        proxyJump = "andromeda";
+        user = "root";
+      };
       quartz = {
         user = "sleit";
         hostname = "192.168.2.35";
@@ -100,7 +100,7 @@ in {
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
-      user.signingkey = "/Users/og326/.ssh/id_ed25519";
+      user.signingkey = "/Users/og326/.ssh/id_ed25519_touchid";
     };
 
     difftastic.enable = true;

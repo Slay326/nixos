@@ -39,6 +39,7 @@
       "minikube"
       "openssh"
       "theseal/ssh-askpass/ssh-askpass"
+      "opentofu"
     ];
     casks = [
     ];
@@ -47,6 +48,7 @@
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.linux-builder.enable = true;
 
   home-manager.users.${systemConfig.user.username} = {pkgs, ...}: {
     home.stateVersion = "23.11";
@@ -81,7 +83,7 @@
   #system
   system = {
     stateVersion = 4;
-
+    primaryUser = "og326";
     defaults = {
       # minimal dock
       dock = {
@@ -97,11 +99,11 @@
         ShowPathbar = true;
         FXEnableExtensionChangeWarning = false;
       };
-      # Tab between form controls and F-row that behaves as F1-F12
-      #NSGlobalDomain = {
-      #  AppleKeyboardUIMode = 3;
-      #  "com.apple.keyboard.fnState" = true;
-      #};
+      #Tab between form controls and F-row that behaves as F1-F12
+      NSGlobalDomain = {
+        AppleKeyboardUIMode = 3;
+        "com.apple.keyboard.fnState" = true;
+      };
     };
   };
 }
