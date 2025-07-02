@@ -19,8 +19,8 @@
     ./modules/wezterm.nix
     ./modules/shells.nix
     ./modules/ssh.nix
-    ./modules/browsers.nix
+    ./modules/browsers
     ./modules/media-player.nix
-    ./modules/code-editors.nix
+    ./modules/code-editors
   ];
 }

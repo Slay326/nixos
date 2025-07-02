@@ -3,13 +3,19 @@
   inputs,
   ...
 }: let
-  # own nixpkgs with some updated packages
+  # plugins are currently broken, see https://github.com/nixos/nixpkgs/issues/400317
+  #plugins = ["github-copilot" "ideavim"];
   meenzen = import inputs.nixpkgs-meenzen {
     system = pkgs.system;
     config.allowUnfree = true;
   };
-  # TODO: remove this
-  jetbrains-plugins = ["ideavim"];
+  plugins = [];
+
+  # https://nixos.wiki/wiki/Jetbrains_Tools
+  mkIde = package:
+    if plugins != []
+    then (pkgs.jetbrains.plugins.addPlugins package plugins)
+    else package;
   vscodeCustomExtensionsList = [
     {
       name = "pascal";
@@ -64,15 +70,16 @@
 
   additionalExtensions = [];
 in {
-  home.packages = with pkgs; [
+  home.packages = [
     # Editors
-    vscode
-    kdePackages.kate
-    jetbrains-toolbox
-    # https://nixos.wiki/wiki/Jetbrains_Tools
-    (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
-    #(jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
+    pkgs.vscode
+    pkgs.kdePackages.kate
+
+    #pkgs.jetbrains-toolbox
+
+    (mkIde pkgs.jetbrains.rider)
+    (mkIde pkgs.jetbrains.clion)
+    (mkIde pkgs.jetbrains.idea-ultimate)
   ];
 
   programs.vscode = {

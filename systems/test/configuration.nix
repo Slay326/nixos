@@ -110,12 +110,14 @@
     cinny-desktop
     terraform
     opentofu
-    opentofu-ls
+    tofu-ls
     qemu
     wget
     unzip
     coreutils
     wireguard-ui
+    yarn
+    nodejs_22
   ];
 
   environment.variables = {
