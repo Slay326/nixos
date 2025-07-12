@@ -11,7 +11,6 @@
     "--enable-zero-copy"
     "--enable-features=VaapiVideoDecodeLinuxGL"
   ];
-  jetbrains-plugins = ["ideavim"];
 in {
   home.username = "og326";
   home.homeDirectory = "/Users/og326";
@@ -23,10 +22,9 @@ in {
       commandLineArgs = args;
     })
     firefox
-    (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
-
+    jetbrains.clion
+    jetbrains.idea-ultimate
+  jetbrains.rider
     nerd-fonts.jetbrains-mono
   ];
 
