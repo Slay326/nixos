@@ -31,18 +31,28 @@
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
+        identityFile = "/home/reyess/.ssh/proxmox";
       };
       silicon = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.20";
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
+        identityFile = "/home/reyess/.ssh/proxmox";
       };
       voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.21";
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
+        identityFile = "/home/reyess/.ssh/proxmox";
+      };
+      atlas = lib.hm.dag.entryAfter ["andromeda"] {
+        hostname = "10.0.0.30";
+        proxyJump = "andromeda";
+        user = "root";
+        identitiesOnly = true;
+        identityFile = "/home/reyess/.ssh/proxmox";
       };
       windows-slave = {
         hostname = "192.168.2.47";

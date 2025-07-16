@@ -30,7 +30,6 @@ in {
     nerd-fonts.jetbrains-mono
   ];
 
-
   home.sessionVariables = {
     SSH_AUTH_SOCK = "~/.ssh/agent";
     SSH_ASKPASS = "/opt/homebrew/bin/ssh-askpass";
@@ -70,12 +69,12 @@ in {
         proxyJump = "andromeda";
         user = "root";
       };
-            atlas = lib.hm.dag.entryAfter ["andromeda"] {
+      atlas = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.30";
         proxyJump = "andromeda";
         user = "root";
       };
-            phoenix = lib.hm.dag.entryAfter ["andromeda"] {
+      phoenix = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.31";
         proxyJump = "andromeda";
         user = "root";

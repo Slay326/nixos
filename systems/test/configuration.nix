@@ -118,6 +118,7 @@
     wireguard-ui
     yarn
     nodejs_22
+    ffmpeg
   ];
 
   environment.variables = {

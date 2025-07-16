@@ -4,8 +4,10 @@
   config,
   pkgs,
   systemConfig,
+  modulesPath,
   ...
 }: {
+  imports = ["${modulesPath}/virtualisation/qemu-vm.nix"];
   system.stateVersion = "24.11";
   networking.hostName = "vm-desktop";
   networking.networkmanager.enable = true;
@@ -38,4 +40,14 @@
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
   ];
+
+  virtualisation.sharedDirectories = {
+    dev = {
+      source = "/home/reyess/dev";
+      target = "/mnt/dev";
+      #fsType = "9p";
+      #options = ["trans=virtio" "cache=loose"];
+      securityModel = "mapped-file";
+    };
+  };
 }

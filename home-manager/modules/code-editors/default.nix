@@ -87,12 +87,26 @@ in {
     profiles = {
       default = {
         userSettings = {
+          "application.shellEnvironmentResolutionTimeout" = 20;
+          "chat.editor.fontFamily" = "JetBrainsMono Nerd Font";
+          "chat.editor.fontSize" = 16.0;
+          "debug.console.fontFamily" = "JetBrainsMono Nerd Font";
+          "debug.console.fontSize" = 16.0;
           "editor.fontFamily" = "JetBrainsMono Nerd Font";
+          "editor.fontSize" = 16.0;
+          "editor.inlayHints.fontFamily" = "JetBrainsMono Nerd Font";
+          "editor.inlineSuggest.fontFamily" = "JetBrainsMono Nerd Font";
+          "editor.minimap.sectionHeaderFontSize" = 10.285714285714286;
+          "explorer.confirmDragAndDrop" = false;
           "git.confirmSync" = false;
           "git.enableCommitSigning" = true;
-          "explorer.confirmDragAndDrop" = false;
+          "markdown.preview.fontFamily" = "Noto Sans";
+          "markdown.preview.fontSize" = 16.0;
+          "scm.inputFontFamily" = "JetBrainsMono Nerd Font";
+          "scm.inputFontSize" = 14.857142857142858;
+          "screencastMode.fontSize" = 64.0;
           "terminal.integrated.enableMultiLinePasteWarning" = "never";
-          "application.shellEnvironmentResolutionTimeout" = 20;
+          "terminal.integrated.fontSize" = 16.0;
         };
         extensions = vscodeStandardExtensions ++ vscodeCustomExtensions ++ additionalExtensions;
       };
