@@ -37,7 +37,7 @@
   slay.ghostty.enable = false;
   #slay.hyprland.enable = true;
   slay.cloudflare-warp.enable = true;
-  slay.vpn.enable = true;
+  slay.vpn.enable = false;
   slay.yubikey.enable = true;
   security.sudo.wheelNeedsPassword = false;
   # Enable CUPS to print documents.
@@ -51,7 +51,12 @@
     };
     openFirewall = true; # Falls du eine Firewall nutzt, öffne Port 22
   };
-
+  services.fprintd.enable = true;
+  security.pam.services = {
+    login.fprintAuth = true;
+    sudo.fprintAuth = true;
+    gdm.fprintAuth = true; # falls du Gnome nutzt
+  };
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -107,7 +112,6 @@
     desktop-file-utils
     colmena
     dbeaver-bin
-    cinny-desktop
     terraform
     opentofu
     tofu-ls
@@ -119,6 +123,8 @@
     yarn
     nodejs_22
     ffmpeg
+    fprintd
+    libfprint
   ];
 
   environment.variables = {
