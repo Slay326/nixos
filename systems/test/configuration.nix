@@ -107,7 +107,7 @@
     git
     kdePackages.ksshaskpass
     obsidian
-    termius
+    #termius
     spotify
     desktop-file-utils
     colmena
