@@ -14,6 +14,7 @@ in {
     sdks = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       default = with pkgs.dotnetCorePackages; [
+        sdk_10_0
         sdk_9_0
         sdk_8_0
       ];

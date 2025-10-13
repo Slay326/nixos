@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   inputs,
   config,
@@ -14,14 +11,11 @@
     ./hardware-configuration.nix
   ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-db6649a5-d532-4d97-b7db-21c52c7f4157".device = "/dev/disk/by-uuid/db6649a5-d532-4d97-b7db-21c52c7f4157";
-  networking.hostName = "nb-6462"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
+  networking.hostName = "nb-6462"; 
   networking.networkmanager.enable = true;
   home-manager.backupFileExtension = "backup";
 
@@ -40,22 +34,21 @@
   slay.vpn.enable = false;
   slay.yubikey.enable = true;
   security.sudo.wheelNeedsPassword = false;
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
   services.openssh = {
     enable = true;
     settings = {
-      PasswordAuthentication = false; # Nur SSH-Keys erlauben
-      PermitRootLogin = "no"; # Root-Login verhindern
+      PasswordAuthentication = false;
+      PermitRootLogin = "no"; 
     };
-    openFirewall = true; # Falls du eine Firewall nutzt, öffne Port 22
+    openFirewall = true;
   };
   services.fprintd.enable = true;
   security.pam.services = {
     login.fprintAuth = true;
     sudo.fprintAuth = true;
-    gdm.fprintAuth = true; # falls du Gnome nutzt
+    gdm.fprintAuth = true;
   };
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -65,12 +58,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -100,14 +87,15 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = ["reyess"];
 
   environment.systemPackages = with pkgs; [
     git
     kdePackages.ksshaskpass
     obsidian
-    #termius
+    termius
+    codex
     spotify
     desktop-file-utils
     colmena
