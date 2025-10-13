@@ -11,7 +11,6 @@
     "--enable-zero-copy"
     "--enable-features=VaapiVideoDecodeLinuxGL"
   ];
-  jetbrains-plugins = ["ideavim"];
 in {
   home.username = "og326";
   home.homeDirectory = "/Users/og326";
@@ -23,10 +22,9 @@ in {
       commandLineArgs = args;
     })
     firefox
-    (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.clion jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
-
+    jetbrains.clion
+    jetbrains.idea-ultimate
+    jetbrains.rider
     nerd-fonts.jetbrains-mono
   ];
 
@@ -48,6 +46,17 @@ in {
     controlMaster = "auto";
     controlPersist = "60m";
     matchBlocks = {
+      github = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        identitiesOnly = true;
+        extraOptions = {
+          ControlMaster = "no";
+          ControlPath = "none";
+          ControlPersist = "no";
+        };
+      };
       # Proxmox Virtual Environment Realm
       andromeda = {
         user = "root";
@@ -150,7 +159,80 @@ in {
           "git.enableCommitSigning" = true;
           "explorer.confirmDragAndDrop" = false;
           "terminal.integrated.enableMultiLinePasteWarning" = "never";
-          "application.shellEnvironmentResolutionTimeout" = 20;
+          "application.shellEnvironmentResolutionTimeout" = 35;
+          "latex-workshop.pdflatex.executable" = "/Library/TeX/Distributions/Programs/texbin/pdflatex";
+          "latex-workshop.latexmk.executable" = "/Library/TeX/Distributions/Programs/texbin/latexmk";
+          "latex-workshop.latex.tools" = [
+            {
+              name = "latexmk";
+              command = "/Library/TeX/Distributions/Programs/texbin/latexmk";
+              args = [
+                "-synctex=1"
+                "-interaction=nonstopmode"
+                "-file-line-error"
+                "-pdf"
+                "-outdir=%OUTDIR%"
+                "%DOC%"
+              ];
+              env = {};
+            }
+            {
+              name = "xelatex";
+              command = "xelatex";
+              args = [
+                "-synctex=1"
+                "-interaction=nonstopmode"
+                "-file-line-error"
+                "%DOC%"
+              ];
+              env = {};
+            }
+            {
+              name = "pdflatex";
+              command = "pdflatex";
+              args = [
+                "-synctex=1"
+                "-interaction=nonstopmode"
+                "-file-line-error"
+                "%DOC%"
+              ];
+              env = {};
+            }
+            {
+              name = "bibtex";
+              command = "bibtex";
+              args = ["%DOCFILE%"];
+              env = {};
+            }
+          ];
+
+          "latex-workshop.latex.recipes" = [
+            {
+              name = "pdfLaTeX";
+              tools = ["pdflatex"];
+            }
+            {
+              name = "latexmk 🔃";
+              tools = ["latexmk"];
+            }
+            {
+              name = "xelatex";
+              tools = ["xelatex"];
+            }
+            {
+              name = "pdflatex ➞ bibtex ➞ pdflatex`×2";
+              tools = ["pdflatex" "bibtex" "pdflatex" "pdflatex"];
+            }
+            {
+              name = "xelatex ➞ bibtex ➞ xelatex`×2";
+              tools = ["xelatex" "bibtex" "xelatex" "xelatex"];
+            }
+          ];
+
+          "[latex]" = {
+            "editor.formatOnPaste" = false;
+            "editor.suggestSelection" = "recentlyUsedByPrefix";
+          };
         };
       };
     };
