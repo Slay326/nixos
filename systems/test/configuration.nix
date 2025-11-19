@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-db6649a5-d532-4d97-b7db-21c52c7f4157".device = "/dev/disk/by-uuid/db6649a5-d532-4d97-b7db-21c52c7f4157";
-  networking.hostName = "nb-6462"; 
+  networking.hostName = "nb-6462";
   networking.networkmanager.enable = true;
   home-manager.backupFileExtension = "backup";
 
@@ -40,7 +40,7 @@
     enable = true;
     settings = {
       PasswordAuthentication = false;
-      PermitRootLogin = "no"; 
+      PermitRootLogin = "no";
     };
     openFirewall = true;
   };
@@ -64,18 +64,32 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${systemConfig.user.username} = {
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
-    description = "reyess";
-    initialPassword = "test";
-    group = "${systemConfig.user.username}";
-    extraGroups = systemConfig.user.extraGroups;
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
+  #users.users.${systemConfig.user.username} = {
+  #  isNormalUser = true;
+  #  openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
+  #  description = "reyess";
+  #  initialPassword = "test";
+  #  group = "${systemConfig.user.username}";
+  #  extraGroups = systemConfig.user.extraGroups;
+  #  packages = with pkgs; [
+  #    kdePackages.kate
+  #  ];
+  #};
+  #users.groups.reyess = {};
+  slay.users = {
+    reyess = {
+      username = "reyess";
+      fullName = "Sleither Reyes";
+      email = "s.reyes@human.de";
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKv9OqoVkdHyxXZ1n7ZUNOvb6ANAOiMUVZBOnhMPBcwI sleither.reyes@gmx.de" #Maybe remove this
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICKXQxIZdFAYE0kDI/73H7vWZJWsVCgY+R7OPeNbfD9zAAAABHNzaDo= ssh:"
+      ];
+      extraGroups = ["networkmanager" "docker" "input"];
+    };
   };
-  users.groups.reyess = {};
+  slay.username = "reyess";
 
   networking.resolvconf.dnsExtensionMechanism = false;
 

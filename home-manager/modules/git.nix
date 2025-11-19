@@ -21,6 +21,6 @@
       #gpg.ssh.allowedSignersFile = "/home/${systemConfig.user.username}/.ssh/allowed_signers";
     };
 
-    difftastic.enable = true;
+    #difftastic.enable = true;
   };
 }

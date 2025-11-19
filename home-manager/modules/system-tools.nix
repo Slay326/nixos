@@ -20,7 +20,7 @@
     ncdu
 
     # gpu related tools
-    glxinfo
+    mesa-demos
     vulkan-tools
     gpu-viewer
 

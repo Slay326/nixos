@@ -16,7 +16,6 @@ in {
       default = with pkgs.dotnetCorePackages; [
         sdk_10_0
         sdk_9_0
-        sdk_8_0
       ];
       description = "List of SDKs to install";
     };
@@ -27,7 +26,7 @@ in {
     ];
 
     environment.sessionVariables = {
-      DOTNET_ROOT = "${dotnet-combined}";
+      DOTNET_ROOT = "${dotnet-combined}/share/dotnet";
       MSBUILDTERMINALLOGGER = "auto";
     };
   };

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./base
     ./basic-packages
     ./bitwarden
     ./bootloader
@@ -22,6 +23,7 @@
     ./plasma
     ./stylix
     ./system-packages
+    ./users
     ./virtualbox
     ./vpn
     ./workarounds

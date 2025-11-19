@@ -54,12 +54,12 @@ in {
       kdePackages.kruler
       kdePackages.kcolorchooser
       kdePackages.kdeconnect-kde
-      kdePackages.neochat
+      #kdePackages.neochat
       kdePackages.kolourpaint
       kdePackages.ghostwriter
       kdePackages.kdenlive
       krita
-      kdePackages.xwaylandvideobridge
+      #kdePackages.xwaylandvideobridge
       xdg-utils
       qpwgraph
     ];

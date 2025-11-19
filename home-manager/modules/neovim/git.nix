@@ -83,4 +83,7 @@
       };
     };
   };
+  programs.difftastic.git = {
+    enable = true;
+  };
 }

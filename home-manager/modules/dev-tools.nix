@@ -5,8 +5,8 @@
 }: let
   dotnet-combined = (with pkgs.dotnetCorePackages;
     combinePackages [
+      sdk_10_0
       sdk_9_0
-      sdk_8_0
     ])
     .overrideAttrs (finalAttrs: previousAttrs: {
     # This is needed to install workload in $HOME
@@ -29,11 +29,13 @@
 in {
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnet-combined}/share/dotnet";
+    DOTNET_MULTILEVEL_LOOKUP = "0";
     MSBUILDTERMINALLOGGER = "auto";
   };
   home.packages = with pkgs; [
     # Compilers
     dotnet-combined
+
     gcc
 
     # Rust
