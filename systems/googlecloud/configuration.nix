@@ -8,6 +8,7 @@
   lib,
   pkgs,
   inputs,
+  systemConfig,
   ...
 }: {
   imports = [
@@ -30,6 +31,15 @@
     wget
     google-guest-agent
   ];
+
+  slay.users.${systemConfig.user.username} = {
+    username = systemConfig.user.username;
+    fullName = systemConfig.user.fullName;
+    email = systemConfig.user.email;
+    authorizedKeys = systemConfig.user.authorizedKeys;
+    extraGroups = systemConfig.user.extraGroups or [];
+  };
+  slay.username = systemConfig.user.username;
 
   system.stateVersion = "23.11";
 }

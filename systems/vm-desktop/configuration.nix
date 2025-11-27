@@ -16,19 +16,15 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   services.qemuGuest.enable = true;
 
-  # Don't forget to define the user
-  users.groups.${systemConfig.user.username} = {};
-  users.users.${systemConfig.user.username} = {
-    isNormalUser = true;
+  slay.users.${systemConfig.user.username} = {
+    username = systemConfig.user.username;
+    fullName = systemConfig.user.fullName;
+    email = systemConfig.user.email;
+    authorizedKeys = systemConfig.user.authorizedKeys;
+    extraGroups = ["networkmanager" "input" "docker"];
     initialPassword = "test";
-    description = "Tester";
-    extraGroups = ["wheel" "networkmanager" "input" "docker"];
   };
-
-  slay.home-manager = {
-    enable = false;
-    homeModule = "${inputs.self}/home-manager/home.nix";
-  };
+  slay.username = systemConfig.user.username;
 
   programs.hyprland = {
     enable = true;

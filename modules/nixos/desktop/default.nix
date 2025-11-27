@@ -17,7 +17,6 @@ in {
     slay.dotnet.enable = false;
     slay.fonts.enable = true;
     slay.java.enable = true;
-    slay.home-manager.enable = false;
     slay.plasma.enable = true;
     slay.stylix.enable = true;
     slay.yubikey.enable = true;

@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  systemConfig,
   ...
 }: {
   networking.hostName = "wsl";
@@ -10,7 +11,16 @@
   slay.docker.enable = true;
   slay.dotnet.enable = true;
   slay.wsl.enable = true;
-  users.users.${config.slay.wsl.defaultUser}.extraGroups = ["docker"];
+  slay.wsl.defaultUser = systemConfig.user.username;
+
+  slay.users.${systemConfig.user.username} = {
+    username = systemConfig.user.username;
+    fullName = systemConfig.user.fullName;
+    email = systemConfig.user.email;
+    authorizedKeys = systemConfig.user.authorizedKeys;
+    extraGroups = ["docker"];
+  };
+  slay.username = systemConfig.user.username;
 
   environment.systemPackages = with pkgs; [
     git

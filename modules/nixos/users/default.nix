@@ -34,6 +34,16 @@
         type = types.package;
         default = pkgs.zsh;
       };
+      homeModule = mkOption {
+        type = types.nullOr types.path;
+        default = null;
+        description = "Optional override for the Home Manager module imported for this user.";
+      };
+      initialPassword = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "Optional initial password for this user (use only for throwaway/test systems).";
+      };
     };
   };
 in {

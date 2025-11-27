@@ -13,7 +13,6 @@
     ./ghostty
     ./hardware
     ./fonts
-    ./home-manager
     ./java
     ./latest-kernel
     ./locale

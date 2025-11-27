@@ -25,6 +25,15 @@
   users.users.root.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
   users.users.nixos.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
 
+  slay.users.${systemConfig.user.username} = {
+    username = systemConfig.user.username;
+    fullName = systemConfig.user.fullName;
+    email = systemConfig.user.email;
+    authorizedKeys = systemConfig.user.authorizedKeys;
+    extraGroups = systemConfig.user.extraGroups or [];
+  };
+  slay.username = systemConfig.user.username;
+
   # force conflicting options
   services.pulseaudio.enable = lib.mkForce false;
   services.openssh.settings.PermitRootLogin = lib.mkForce "yes";

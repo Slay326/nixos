@@ -32,6 +32,7 @@ in {
         name = "system-fonts";
         paths = config.fonts.packages;
         pathsToLink = ["/share/fonts"];
+        ignoreCollisions = true;
       };
     in {
       "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
