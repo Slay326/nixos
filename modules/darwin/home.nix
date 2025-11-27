@@ -163,37 +163,52 @@ in {
           "application.shellEnvironmentResolutionTimeout" = 35;
           "latex-workshop.pdflatex.executable" = "/Library/TeX/Distributions/Programs/texbin/pdflatex";
           "latex-workshop.latexmk.executable" = "/Library/TeX/Distributions/Programs/texbin/latexmk";
+
           "latex-workshop.latex.tools" = [
             {
               name = "latexmk";
               command = "/Library/TeX/Distributions/Programs/texbin/latexmk";
               args = [
-                "-synctex=1"
-                "-interaction=nonstopmode"
-                "-file-line-error"
                 "-pdf"
+                "-interaction=nonstopmode"
+                "-synctex=1"
+                "-file-line-error"
                 "-outdir=%OUTDIR%"
                 "%DOC%"
               ];
               env = {};
             }
             {
-              name = "xelatex";
-              command = "xelatex";
+              name = "latexmk-shellescape";
+              command = "/Library/TeX/Distributions/Programs/texbin/latexmk";
               args = [
-                "-synctex=1"
+                "-pdf"
                 "-interaction=nonstopmode"
+                "-synctex=1"
+                "-shell-escape"
                 "-file-line-error"
+                "-outdir=%OUTDIR%"
                 "%DOC%"
               ];
               env = {};
             }
             {
               name = "pdflatex";
-              command = "pdflatex";
+              command = "/Library/TeX/Distributions/Programs/texbin/pdflatex";
               args = [
-                "-synctex=1"
                 "-interaction=nonstopmode"
+                "-synctex=1"
+                "-file-line-error"
+                "%DOC%"
+              ];
+              env = {};
+            }
+            {
+              name = "xelatex";
+              command = "/Library/TeX/Distributions/Programs/texbin/xelatex";
+              args = [
+                "-interaction=nonstopmode"
+                "-synctex=1"
                 "-file-line-error"
                 "%DOC%"
               ];
@@ -201,28 +216,33 @@ in {
             }
             {
               name = "bibtex";
-              command = "bibtex";
+              command = "/Library/TeX/Distributions/Programs/texbin/bibtex";
               args = ["%DOCFILE%"];
               env = {};
             }
           ];
+          "tidalcycles.bootTidalPath" = "/Users/og326/reyshift/server options.scd";
 
           "latex-workshop.latex.recipes" = [
-            {
-              name = "pdfLaTeX";
-              tools = ["pdflatex"];
-            }
             {
               name = "latexmk 🔃";
               tools = ["latexmk"];
             }
             {
-              name = "xelatex";
-              tools = ["xelatex"];
+              name = "latexmk + shell-escape";
+              tools = ["latexmk-shellescape"];
+            }
+            {
+              name = "pdfLaTeX";
+              tools = ["pdflatex"];
             }
             {
               name = "pdflatex ➞ bibtex ➞ pdflatex`×2";
               tools = ["pdflatex" "bibtex" "pdflatex" "pdflatex"];
+            }
+            {
+              name = "xelatex";
+              tools = ["xelatex"];
             }
             {
               name = "xelatex ➞ bibtex ➞ xelatex`×2";
@@ -230,6 +250,8 @@ in {
             }
           ];
 
+          "latex-workshop.latex.outDir" = "%DIR%/build";
+          "latex-workshop.view.pdf.viewer" = "tab";
           "[latex]" = {
             "editor.formatOnPaste" = false;
             "editor.suggestSelection" = "recentlyUsedByPrefix";
