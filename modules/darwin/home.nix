@@ -41,11 +41,12 @@ in {
 
   programs.ssh = {
     enable = true;
-    compression = true;
     addKeysToAgent = "yes";
-    controlMaster = "auto";
-    controlPersist = "60m";
+    enableDefaultConfig = false;
     matchBlocks = {
+      #compression = true;
+      #controlMaster = "auto";
+      #controlPersist = "60m";
       github = {
         hostname = "github.com";
         user = "git";
