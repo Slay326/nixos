@@ -63,19 +63,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  #users.users.${systemConfig.user.username} = {
-  #  isNormalUser = true;
-  #  openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
-  #  description = "reyess";
-  #  initialPassword = "test";
-  #  group = "${systemConfig.user.username}";
-  #  extraGroups = systemConfig.user.extraGroups;
-  #  packages = with pkgs; [
-  #    kdePackages.kate
-  #  ];
-  #};
-  #users.groups.reyess = {};
   slay.users = {
     reyess = {
       username = "reyess";

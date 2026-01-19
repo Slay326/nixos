@@ -8,14 +8,9 @@
   config,
   ...
 }: let
-  inherit (lib) mkOption mkIf mkMerge types concatStringsSep mkDefault;
-  usersByName = config.slay.users or {};
-  sel = config.slay.username or "";
-  hasSel = builtins.hasAttr sel usersByName;
-  u =
-    if hasSel
-    then usersByName.${sel}
-    else null;
+  inherit (lib) mkOption mkIf mkMerge types mkDefault;
+  activeUser = config.slay.activeUser;
+  hasActiveUser = activeUser != null;
 
   cfgHome = config.slay.home;
   defaultHomeModule = inputs.self + /home-manager/home.nix;
@@ -24,15 +19,15 @@
     additionalShownSystemTrayItems = [];
   };
   resolvedHomeModule =
-    if u != null && u.homeModule != null
-    then u.homeModule
+    if hasActiveUser && activeUser.homeModule != null
+    then activeUser.homeModule
     else cfgHome.homeModule;
 
   # extragrps ohne Primärgruppe
   sanitizedExtraGroups =
-    if u == null
+    if !hasActiveUser
     then []
-    else builtins.filter (g: g != u.username) u.extraGroups;
+    else builtins.filter (g: g != activeUser.username) activeUser.extraGroups;
 in {
   options.slay.home = {
     homeModule = mkOption {
@@ -53,17 +48,6 @@ in {
 
   config = mkMerge [
     {
-      assertions = [
-        {
-          assertion = sel != "";
-          message = "slay.username must be set.";
-        }
-        {
-          assertion = hasSel;
-          message = "slay.username must be one of: ${concatStringsSep ", " (builtins.attrNames usersByName)}";
-        }
-      ];
-
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
@@ -79,32 +63,32 @@ in {
       };
     }
 
-    (mkIf (u != null) (mkMerge [
+    (mkIf hasActiveUser (mkMerge [
       # Primärgruppe + System-User
-      {users.groups.${u.username} = {};}
+      {users.groups.${activeUser.username} = {};}
 
       {
-        users.users.${u.username} =
+        users.users.${activeUser.username} =
           {
             isNormalUser = true;
             isSystemUser = false;
-            description = u.fullName or u.username;
-            group = u.username;
-            home = "/home/${u.username}";
-            shell = mkDefault u.shell;
+            description = activeUser.fullName or activeUser.username;
+            group = activeUser.username;
+            home = activeUser.home;
+            shell = mkDefault activeUser.shell;
             extraGroups = sanitizedExtraGroups ++ ["wheel"];
-            openssh.authorizedKeys.keys = u.authorizedKeys or [];
+            openssh.authorizedKeys.keys = activeUser.authorizedKeys or [];
           }
           // (
-            if u.initialPassword != null
-            then {initialPassword = u.initialPassword;}
+            if activeUser.initialPassword != null
+            then {initialPassword = activeUser.initialPassword;}
             else {}
           );
       }
 
       # HM nur für diesen User – KEIN home.username/home.homeDirectory in HM setzen!
       {
-        home-manager.users.${u.username}.imports = [
+        home-manager.users.${activeUser.username}.imports = [
           resolvedHomeModule
         ];
       }

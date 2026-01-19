@@ -1,9 +1,6 @@
-{systemConfig, ...}: {
+{...}: {
   home = {
-    username = systemConfig.user.username;
-    homeDirectory = "/home/${systemConfig.user.username}";
-
-    # Environt Variables
+    # Environment variables that should follow the active user automatically
     sessionVariables = {
       GITLAB_HOST = "https://git.human.de";
       ANSIBLE_NOCOWS = "1";

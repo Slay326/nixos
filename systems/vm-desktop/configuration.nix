@@ -3,7 +3,6 @@
   lib,
   config,
   pkgs,
-  systemConfig,
   modulesPath,
   ...
 }: {
@@ -16,15 +15,21 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   services.qemuGuest.enable = true;
 
-  slay.users.${systemConfig.user.username} = {
-    username = systemConfig.user.username;
-    fullName = systemConfig.user.fullName;
-    email = systemConfig.user.email;
-    authorizedKeys = systemConfig.user.authorizedKeys;
-    extraGroups = ["networkmanager" "input" "docker"];
-    initialPassword = "test";
+  slay.users = {
+    reyess = {
+      username = "reyess";
+      fullName = "Sleither Reyes";
+      email = "s.reyes@human.de";
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKv9OqoVkdHyxXZ1n7ZUNOvb6ANAOiMUVZBOnhMPBcwI sleither.reyes@gmx.de"
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICKXQxIZdFAYE0kDI/73H7vWZJWsVCgY+R7OPeNbfD9zAAAABHNzaDo= ssh:"
+      ];
+      extraGroups = ["networkmanager" "input" "docker"];
+      initialPassword = "test";
+    };
   };
-  slay.username = systemConfig.user.username;
+  slay.username = "reyess";
 
   programs.hyprland = {
     enable = true;
@@ -39,7 +44,7 @@
 
   virtualisation.sharedDirectories = {
     dev = {
-      source = "/home/reyess/dev";
+      source = "${config.slay.activeUser.home}/dev";
       target = "/mnt/dev";
       #fsType = "9p";
       #options = ["trans=virtio" "cache=loose"];

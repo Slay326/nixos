@@ -2,10 +2,10 @@
   config,
   lib,
   pkgs,
-  systemConfig,
   ...
 }: let
   cfg = config.slay.nginx;
+  activeUser = config.slay.activeUser;
 
   nginxConfig =
     {
@@ -56,9 +56,9 @@ in {
 
     services.nginx = nginxConfig;
 
-    security.acme = {
+    security.acme = lib.mkIf (activeUser != null) {
       acceptTerms = true;
-      defaults.email = systemConfig.user.email;
+      defaults.email = activeUser.email;
     };
     slay.backup.paths = [
       "/var/lib/acme"

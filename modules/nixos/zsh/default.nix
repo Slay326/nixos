@@ -1,16 +1,22 @@
 {
+  lib,
   pkgs,
-  systemConfig,
+  config,
   ...
-}: {
-  programs.zsh.enable = true;
+}: let
+  inherit (lib) mkMerge mkIf;
+  activeUser = config.slay.activeUser;
+in {
+  config = mkMerge [
+    {
+      programs.zsh.enable = true;
 
-  # make completions work
-  environment.pathsToLink = ["/share/zsh"];
+      # make completions work
+      environment.pathsToLink = ["/share/zsh"];
+    }
 
-  users.users = {
-    "${systemConfig.user.username}" = {
-      shell = pkgs.zsh;
-    };
-  };
+    (mkIf (activeUser != null) {
+      users.users.${activeUser.username}.shell = pkgs.zsh;
+    })
+  ];
 }
