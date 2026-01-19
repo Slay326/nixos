@@ -271,6 +271,7 @@
       install-iso = mkSystem ./systems/install-iso/configuration.nix;
       test = mkSystem ./systems/test/configuration.nix;
       vm-desktop = mkSystem ./systems/vm-desktop/configuration.nix;
+      quartz-nix = mkSystem ./systems/quartz/configuration.nix;
     };
 
     darwinConfigurations = {
