@@ -112,6 +112,12 @@ in {
       readOnly = true;
       description = "Resolved user attrset derived from slay.username and slay.users.";
     };
+
+    git.signing.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable SSH commit signing in Home Manager git config.";
+    };
   };
 
   config = mkMerge [

@@ -24,7 +24,7 @@
         port = 2222;
       };
       git = {
-        hostname = "git.airshade.net";
+        hostname = "git.sleither.net";
         user = "gitlab";
         identitiesOnly = true;
       };
@@ -33,28 +33,28 @@
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
-        identityFile = "/home/reyess/.ssh/proxmox";
+        identityFile = "/home/slay/.ssh/id_ed25519";
       };
       silicon = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.20";
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
-        identityFile = "/home/reyess/.ssh/proxmox";
+        identityFile = "/home/slay/.ssh/id_ed25519";
       };
       voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.21";
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
-        identityFile = "/home/reyess/.ssh/proxmox";
+        identityFile = "/home/slay/.ssh/id_ed25519";
       };
       atlas = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.30";
         proxyJump = "andromeda";
         user = "root";
         identitiesOnly = true;
-        identityFile = "/home/reyess/.ssh/proxmox";
+        identityFile = "/home/slay/.ssh/id_ed25519";
       };
       windows-slave = {
         hostname = "192.168.2.47";

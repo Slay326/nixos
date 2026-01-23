@@ -31,6 +31,7 @@ in {
     DOTNET_ROOT = "${dotnet-combined}/share/dotnet";
     DOTNET_MULTILEVEL_LOOKUP = "0";
     MSBUILDTERMINALLOGGER = "auto";
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
   };
   home.packages = with pkgs; [
     # Compilers
