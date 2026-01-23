@@ -247,7 +247,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = {inherit inputs outputs self;};
+              extraSpecialArgs = {inherit inputs outputs self systemConfig;};
               users."og326" = import ./modules/darwin/home.nix;
             };
           }

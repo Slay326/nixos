@@ -11,10 +11,12 @@
   programs.ssh = {
     enable = true;
     compression = true;
-    addKeysToAgent = "yes";
     controlMaster = "auto";
     controlPersist = "60m";
     matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes";
+      };
       # Proxmox Virtual Environment
       andromeda = {
         user = "root";

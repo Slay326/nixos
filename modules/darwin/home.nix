@@ -41,9 +41,11 @@ in {
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
     enableDefaultConfig = false;
     matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes";
+      };
       #compression = true;
       #controlMaster = "auto";
       #controlPersist = "60m";
@@ -99,20 +101,25 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "Sleither Reyes";
-    userEmail = "sleither.reyes@gmx.de";
     lfs.enable = true;
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Sleither Reyes";
+        email = "sleither.reyes@gmx.de";
+        signingkey = "/Users/og326/.ssh/id_ed25519_touchid";
+      };
       init.defaultBranch = "master";
       core.autocrlf = false;
       credential.helper = "osxkeychain";
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
-      user.signingkey = "/Users/og326/.ssh/id_ed25519_touchid";
     };
+  };
 
-    difftastic.enable = true;
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
   };
 
   programs.chromium = {
