@@ -43,7 +43,7 @@
     then activeUser.fullName
     else if (activeUser ? username) && (activeUser.username or "") != ""
     then activeUser.username
-    else throw "slay.git: Unable to resolve git userName. Set slay.users.${username}.fullName or programs.git.userName.";
+    else throw "slay.git: Unable to resolve git userName. Set slay.users.${username}.fullName or programs.git.settings.user.name.";
 
   derivedEmail =
     if (activeUser ? email) && (activeUser.email or "") != ""
@@ -55,30 +55,36 @@
   signingEnabled = config.slay.git.signing.enable;
   signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
 
-  gitConfig =
+  gitUserSettings =
     {
-      enable = true;
-      package = pkgs.gitFull;
-
-      userName = mkDefault userName;
-      lfs.enable = true;
-
-      extraConfig =
-        {
-          init.defaultBranch = "main";
-          core.autocrlf = false;
-          credential.helper = "libsecret";
-          rerere.enabled = true;
-        }
-        // optionalAttrs signingEnabled {
-          commit.gpgsign = true;
-          gpg.format = "ssh";
-          user.signingkey = signingKey;
-        };
+      name = mkDefault userName;
     }
     // optionalAttrs (derivedEmail != null) {
-      userEmail = mkDefault derivedEmail;
+      email = mkDefault derivedEmail;
+    }
+    // optionalAttrs signingEnabled {
+      signingkey = signingKey;
     };
+
+  gitSettings =
+    {
+      user = gitUserSettings;
+      init.defaultBranch = "main";
+      core.autocrlf = false;
+      credential.helper = "libsecret";
+      rerere.enabled = true;
+    }
+    // optionalAttrs signingEnabled {
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+    };
+
+  gitConfig = {
+    enable = true;
+    package = pkgs.gitFull;
+    lfs.enable = true;
+    settings = gitSettings;
+  };
 
   isNonEmpty = value: value != null && value != "";
 in {
@@ -93,12 +99,12 @@ in {
 
     assertions = [
       {
-        assertion = isNonEmpty config.programs.git.userName;
-        message = "slay.git: Git userName is empty. Set slay.users.${username}.fullName/username or programs.git.userName.";
+        assertion = isNonEmpty (attrByPath ["programs" "git" "settings" "user" "name"] "" config);
+        message = "slay.git: Git userName is empty. Set slay.users.${username}.fullName/username or programs.git.settings.user.name.";
       }
       {
-        assertion = isNonEmpty config.programs.git.userEmail;
-        message = "slay.git: Git userEmail is empty. Set slay.users.${username}.email or programs.git.userEmail.";
+        assertion = isNonEmpty (attrByPath ["programs" "git" "settings" "user" "email"] "" config);
+        message = "slay.git: Git userEmail is empty. Set slay.users.${username}.email or programs.git.settings.user.email.";
       }
     ];
   };

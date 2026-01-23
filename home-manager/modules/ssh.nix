@@ -10,12 +10,19 @@
 
   programs.ssh = {
     enable = true;
-    compression = true;
-    controlMaster = "auto";
-    controlPersist = "60m";
+    enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
         addKeysToAgent = "yes";
+        forwardAgent = false;
+        compression = true;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "60m";
       };
       # Proxmox Virtual Environment
       andromeda = {

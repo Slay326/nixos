@@ -79,7 +79,7 @@ in {
 
     (mkIde pkgs.jetbrains.rider)
     (mkIde pkgs.jetbrains.clion)
-    (mkIde pkgs.jetbrains.idea-ultimate)
+    (mkIde pkgs.jetbrains.idea)
   ];
 
   programs.vscode = {

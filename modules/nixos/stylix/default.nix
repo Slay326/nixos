@@ -9,6 +9,14 @@
 in {
   options.slay.stylix = {
     enable = lib.mkEnableOption "Enable Stylix";
+    qtPlatform = lib.mkOption {
+      type = lib.types.enum ["kde" "qtct"];
+      default =
+        if config.slay.plasma.enable
+        then "kde"
+        else "qtct";
+      description = "Qt platform theme for Stylix. Override per host via slay.stylix.qtPlatform.";
+    };
   };
 
   imports = [
@@ -28,6 +36,9 @@ in {
       polarity = "dark";
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/purpledream.yaml";
+
+      # Single source of truth for Qt platform; override per host via slay.stylix.qtPlatform.
+      targets.qt.platform = lib.mkDefault cfg.qtPlatform;
 
       cursor = {
         name = "breeze_cursors";

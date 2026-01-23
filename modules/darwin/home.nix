@@ -23,7 +23,7 @@ in {
     })
     firefox
     jetbrains.clion
-    jetbrains.idea-ultimate
+    jetbrains.idea
     jetbrains.rider
     nerd-fonts.jetbrains-mono
   ];
