@@ -32,13 +32,20 @@ in {
     DOTNET_MULTILEVEL_LOOKUP = "0";
     MSBUILDTERMINALLOGGER = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
+    # Volta
+    VOLTA_HOME = "$HOME/.volta";
   };
+
+  home.sessionPath = [
+    "$HOME/.volta/bin"
+  ];
+
   home.packages = with pkgs; [
     # Compilers
     dotnet-combined
-
     gcc
 
+    volta
     # Rust
     rustup
 
@@ -50,4 +57,9 @@ in {
     terraform
     xclip
   ];
+
+  programs.zsh.initContent = ''
+    export VOLTA_HOME="$HOME/.volta"
+    export PATH="$VOLTA_HOME/bin:$PATH"
+  '';
 }

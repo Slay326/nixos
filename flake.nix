@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-mozilla.url = "github:mozilla/nixpkgs-mozilla";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -181,9 +182,9 @@
         isNormalUser = true;
         initialPassword = "password";
         authorizedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB slay@dell"
-          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIO/x3ZqJPZ2M01almriEhk30UM/Qjo3PKTcKpr8XM12AAAAABHNzaDo= YubiKey 5C 1st"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKv9OqoVkdHyxXZ1n7ZUNOvb6ANAOiMUVZBOnhMPBcwI sleither.reyes@gmx.de"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC50x5DkP6krKFqSkL0vP6zU1o1VsTju91SEuoudqgVi quartz"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMdwPMCh37mVvmKFBFuPW8DqR4v8+HWq0bRe6LC/3UoC onyx"
         ];
         extraGroups = ["networkmanager" "wheel" "input" "reyess" "docker"];
       };
@@ -208,14 +209,17 @@
     in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit
-            inputs
-            outputs
-            self
-            systemConfig
-            ;
+          inherit inputs outputs self systemConfig;
         };
+
         modules = [
+          ({...}: {
+            nixpkgs.overlays = [
+              (import "${inputs.nixpkgs-mozilla}/firefox-overlay.nix")
+            ];
+            nixpkgs.config.allowUnfree = true;
+          })
+
           ./modules/nixos
           systemModule
         ];

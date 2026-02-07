@@ -6,7 +6,6 @@ let
     ls = "exa";
     top = "htop";
     grep = "rg";
-    cat = "bat";
     weather = "curl wttr.in/Wiesbaden";
     lolcat = "clolcat";
     neofetch = "fastfetch";

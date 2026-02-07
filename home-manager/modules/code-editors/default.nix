@@ -31,15 +31,9 @@
     }
     {
       name = "opentofu";
-      publisher = "gamunu";
-      version = "0.2.1";
-      sha256 = "OizdHTSGuwBRuD/qPXjmna6kZWfRp9EimhcFk3ICN9I=";
-    }
-    {
-      name = "latex-formatter";
-      publisher = "nickfode";
-      version = "1.0.5";
-      sha256 = "JzctJW0/rCEFbNxeGh/chLE4LU/oydW3QKdAxgj64v8=";
+      publisher = "OpenTofu";
+      version = "0.6.0";
+      sha256 = "";
     }
     {
       name = "vscode-typescript-next";
@@ -107,6 +101,8 @@ in {
           "screencastMode.fontSize" = 64.0;
           "terminal.integrated.enableMultiLinePasteWarning" = "never";
           "terminal.integrated.fontSize" = 16.0;
+          "github.copilot.nextEditSuggestions.enabled" = false;
+          "editor.inlineSuggest.enabled" = false;
         };
         extensions = vscodeStandardExtensions ++ vscodeCustomExtensions ++ additionalExtensions;
       };

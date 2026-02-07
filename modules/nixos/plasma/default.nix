@@ -6,6 +6,9 @@
   ...
 }: let
   cfg = config.slay.plasma;
+  kdenliveNoShaderc = pkgs.kdePackages.kdenlive.override {
+    ffmpeg-full = pkgs.ffmpeg-full.override {withShaderc = false;};
+  };
 in {
   options.slay.plasma = {
     enable = lib.mkEnableOption "Enable Plasma Desktop";
@@ -57,7 +60,7 @@ in {
       #kdePackages.neochat
       kdePackages.kolourpaint
       kdePackages.ghostwriter
-      kdePackages.kdenlive
+      kdenliveNoShaderc
       krita
       #kdePackages.xwaylandvideobridge
       xdg-utils

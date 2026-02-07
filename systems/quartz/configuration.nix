@@ -30,6 +30,8 @@
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
+  slay.hardware.nvidia.enable = true;
+  slay.git.signing.enable = true;
   #slay.hyprland.enable = true;
   slay.cloudflare-warp.enable = false;
   security.sudo.wheelNeedsPassword = false;
@@ -82,8 +84,6 @@
     pulse.enable = true;
   };
 
-  programs.firefox.enable = true;
-
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -106,11 +106,16 @@
     coreutils
     wireguard-ui
     yarn
-    nodejs_22
     ffmpeg
     fprintd
     libfprint
+    #nodejs_22
   ];
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   system.stateVersion = "25.05";

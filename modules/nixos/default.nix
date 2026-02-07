@@ -14,6 +14,7 @@
     ./hardware
     ./fonts
     ./java
+    #./javascript
     ./latest-kernel
     ./locale
     ./nix
