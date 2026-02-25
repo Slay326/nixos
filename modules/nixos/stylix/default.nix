@@ -11,11 +11,8 @@ in {
     enable = lib.mkEnableOption "Enable Stylix";
     qtPlatform = lib.mkOption {
       type = lib.types.enum ["kde" "qtct"];
-      default =
-        if config.slay.plasma.enable
-        then "kde"
-        else "qtct";
-      description = "Qt platform theme for Stylix. Override per host via slay.stylix.qtPlatform.";
+      default = "qtct";
+      description = "Qt platform theme for Stylix. Override per host via slay.stylix.qtPlatform (Stylix currently supports only qtct).";
     };
   };
 

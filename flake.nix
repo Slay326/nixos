@@ -235,23 +235,6 @@
         echo "OCR functionality"
         exit 0
       '';
-
-      qtEnv = let
-        qt = pkgs.qt6Packages;
-
-        qtMods =
-          [
-            qt.qtbase
-            qt.qtdeclarative
-            qt.qttools
-            qt.qtshadertools
-            qt.qtlocation
-            qt.qtpositioning
-            qt.qtwayland
-          ]
-          ++ pkgs.lib.optionals (qt ? qtquickcontrols2) [qt.qtquickcontrols2];
-      in
-        qt.env "qt6-automotive-${qt.qtbase.version}" qtMods;
     in {
       packages = {
         wl-ocr = wl-ocr;
@@ -266,43 +249,14 @@
             alejandra
             colmena.packages."${system}".colmena
             agenix.packages."${system}".default
-            starship
           ];
 
           shellHook = ''
-            if [ -n "$ZSH_VERSION" ]; then
-            eval "$(starship init zsh)"
-            elif [ -n "$BASH_VERSION" ]; then
-            eval "$(starship init bash)"
-            fi
-
             echo ""
             echo "$(git --version)"
             echo "$(nil --version)"
             echo "$(alejandra --version)"
             echo ""
-          '';
-        };
-
-        qt-automotive = pkgs.mkShell {
-          packages = with pkgs; [
-            qtEnv
-            libglvnd
-            cmake
-            ninja
-            pkg-config
-            gcc
-            gdb
-            qtcreator
-          ];
-
-          shellHook = ''
-            export QT_QPA_PLATFORM=wayland
-            export QT_PLUGIN_PATH="${qtEnv}/lib/qt-6/plugins"
-            export QML_IMPORT_PATH="${qtEnv}/lib/qt-6/qml"
-            export QT_QPA_PLATFORM_PLUGIN_PATH="${qtEnv}/lib/qt-6/plugins/platforms"
-            export PKG_CONFIG_PATH="${qtEnv}/lib/pkgconfig:$PKG_CONFIG_PATH"
-            echo "Qt dev shell active: ${qtEnv.name}"
           '';
         };
       };

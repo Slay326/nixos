@@ -39,6 +39,7 @@ in {
       };
     };
   };
+  stylix.targets.firefox.profileNames = ["default"];
 
   # Chromium (bei dir: Brave als chromium package)
   programs.chromium = {
