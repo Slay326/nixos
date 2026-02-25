@@ -146,11 +146,79 @@ in {
     enable = true;
     enableZshIntegration = true;
     extraConfig = ''
-      return {
-        font = wezterm.font("JetBrainsMono Nerd Font"),
-        font_size = 14.0,
-        hide_tab_bar_if_only_one_tab = true,
-      }
+local wezterm = require("wezterm")
+local act = wezterm.action
+
+-- Zwei "Presets": Glass vs Solid
+local GLASS = {
+  opacity = 0.82, -- weniger = mehr durchsichtig
+  blur = 35,
+}
+
+local SOLID = {
+  opacity = 1.0,
+  blur = 0,
+}
+
+-- Start im Glass-Mode
+wezterm.GLOBAL.is_glass = true
+
+wezterm.on("toggle-glass", function(window, _pane)
+  wezterm.GLOBAL.is_glass = not wezterm.GLOBAL.is_glass
+  local p = wezterm.GLOBAL.is_glass and GLASS or SOLID
+
+  -- Runtime Overrides setzen (ohne Neustart)
+  window:set_config_overrides({
+    window_background_opacity = p.opacity,
+    macos_window_background_blur = p.blur,
+  })
+end)
+
+return {
+  -- Chrome weg, damit es "verschmilzt"
+  window_decorations = "RESIZE", -- keine Titlebar, nur resize
+  enable_tab_bar = false,
+
+
+  window_background_opacity = GLASS.opacity,
+  macos_window_background_blur = GLASS.blur,
+
+
+  window_padding = {
+    left = 18,
+    right = 18,
+    top = 14,
+    bottom = 14,
+  },
+
+  -- Performance / Smoothness
+  front_end = "WebGpu",
+  animation_fps = 120,
+  max_fps = 120,
+
+
+  font = wezterm.font_with_fallback({
+    "JetBrainsMono Nerd Font",
+    "SF Mono",
+  }),
+  font_size = 14.0,
+
+
+  default_cursor_style = "BlinkingBar",
+
+  -- Keybinding: CMD+U toggle Glass/Solid
+  keys = {
+    {
+      key = "u",
+      mods = "CMD",
+      action = act.EmitEvent("toggle-glass"),
+    },
+  },
+
+  colors = {
+    background = "#0b0f14",
+  },
+}
     '';
   };
 
