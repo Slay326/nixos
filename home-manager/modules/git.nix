@@ -50,7 +50,6 @@
     then activeUser.email
     else null;
 
-  # Opt-in SSH commit signing; override per host via slay.git.signing.enable.
   signingFromOs = attrByPath ["slay" "git" "signing" "enable"] false osConfig;
   signingEnabled = config.slay.git.signing.enable;
   signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
@@ -69,7 +68,7 @@
   gitSettings =
     {
       user = gitUserSettings;
-      init.defaultBranch = "main";
+      init.defaultBranch = "master";
       core.autocrlf = false;
       credential.helper = "libsecret";
       rerere.enabled = true;

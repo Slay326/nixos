@@ -40,10 +40,12 @@
                   "applications:org.kde.dolphin.desktop"
                   "applications:org.wezfurlong.wezterm.desktop"
                   "applications:brave-browser.desktop"
-                  "applications:rider.desktop"
                   "applications:clion.desktop"
+                  "applications:idea.desktop"
+                  "applications:rider.desktop"
                   "applications:firefox.desktop"
-                  "applications:obsidian.desktop"
+                  "applications:vesktop.desktop"
+                  "applications:spotify.desktop"
                 ]
                 ++ extraConfig.additionalPinnedApps;
             };

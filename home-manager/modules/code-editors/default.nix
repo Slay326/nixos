@@ -29,12 +29,12 @@
       version = "3.0.0";
       sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
     }
-    {
-      name = "opentofu";
-      publisher = "OpenTofu";
-      version = "0.6.0";
-      sha256 = "";
-    }
+    # {
+    #   name = "opentofu";
+    #   publisher = "OpenTofu";
+    #   version = "0.6.0";
+    #   sha256 = "";
+    # }
     {
       name = "vscode-typescript-next";
       publisher = "ms-vscode";
