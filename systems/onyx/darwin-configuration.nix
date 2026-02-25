@@ -47,8 +47,9 @@
     onActivation.upgrade = true;
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.linux-builder.enable = true;
+  #nix.settings.experimental-features = ["nix-command" "flakes"];
+  #nix.linux-builder.enable = true;
+  nix.enable = false;
 
   home-manager.users.${systemConfig.user.username} = {pkgs, ...}: {
     home.stateVersion = "23.11";

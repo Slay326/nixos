@@ -1,19 +1,76 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -eo pipefail
+REPO="$HOME/Code/nixos"
+HOST="onyx"
 
 LIGHT_BLUE='\033[1;34m'
+GREEN='\033[0;32m'
 NO_COLOR='\033[0m'
 
 print () {
-    echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
+  echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
 }
 
-print "=> Starting Install"
+success () {
+  echo -e "${GREEN}$1${NO_COLOR}"
+}
 
-print "==> Formatting Code"
-alejandra . >/dev/null 2>&1
+cmd="${1:-install}"
 
-print "==> Rebuilding NixOS"
-git add .
-darwin-rebuild switch --flake .#onyx
+print "=> Darwin config: $cmd"
+print "=> Repo: $REPO"
+echo
+
+cd "$REPO"
+
+case "$cmd" in
+  install)
+    print "==> Formatting Nix files (alejandra)"
+    alejandra .
+
+    print "==> Staging changes"
+    git add .
+
+    print "==> Applying system configuration"
+    darwin-rebuild switch --flake ".#$HOST"
+
+    success "✔ Install complete"
+    ;;
+
+  update)
+    print "==> Updating flake inputs"
+    nix flake update
+
+    print "==> Formatting Nix files (alejandra)"
+    alejandra .
+
+    print "==> Staging changes"
+    git add .
+
+    print "==> Applying updated system configuration"
+    darwin-rebuild switch --flake ".#$HOST"
+
+    success "✔ Update complete"
+    ;;
+
+  check)
+    print "==> Formatting Nix files (alejandra)"
+    alejandra .
+
+    print "==> Running flake checks"
+    nix flake check
+
+    success "✔ Check complete"
+    ;;
+
+  *)
+    echo "Unknown command: $cmd"
+    echo
+    echo "Usage:"
+    echo "  darwin-config install"
+    echo "  darwin-config update"
+    echo "  darwin-config check"
+    exit 1
+    ;;
+esac

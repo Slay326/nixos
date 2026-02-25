@@ -18,9 +18,6 @@ in {
   home.packages = with pkgs; [
     htop
     curl
-    (google-chrome.override {
-      commandLineArgs = args;
-    })
     firefox
     jetbrains.clion
     jetbrains.idea
