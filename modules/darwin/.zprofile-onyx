@@ -1,0 +1,22 @@
+# TeX
+export PATH="/Library/TeX/texbin:$PATH"
+
+# Volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Local bins
+export PATH="$HOME/.local/bin:$PATH"
+
+# Homebrew + system bins
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
+# .NET
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$DOTNET_ROOT:$HOME/bin:$PATH"
+export DOTNET_MULTILEVEL_LOOKUP=0
+
+# Nix daemon environment
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi

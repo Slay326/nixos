@@ -17,6 +17,7 @@ in {
 
   home.packages = with pkgs; [
     htop
+    btop
     curl
     firefox
     jetbrains.clion
@@ -62,35 +63,47 @@ in {
         user = "root";
         hostname = "138.201.57.80";
         port = 2222;
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       mercury = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.10";
         proxyJump = "andromeda";
         user = "root";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       silicon = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.20";
         proxyJump = "andromeda";
         user = "root";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.21";
         proxyJump = "andromeda";
         user = "root";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       atlas = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.30";
         proxyJump = "andromeda";
         user = "root";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       phoenix = lib.hm.dag.entryAfter ["andromeda"] {
         hostname = "10.0.0.31";
         proxyJump = "andromeda";
         user = "root";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
-      quartz = {
+      quartz-win = {
         user = "sleit";
         hostname = "192.168.2.35";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+      };
+      quartz-nix = {
+        user = "slay";
+        hostname = "192.168.2.35";
+        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
     };
   };
@@ -145,81 +158,12 @@ in {
   programs.wezterm = {
     enable = true;
     enableZshIntegration = true;
-    extraConfig = ''
-local wezterm = require("wezterm")
-local act = wezterm.action
-
--- Zwei "Presets": Glass vs Solid
-local GLASS = {
-  opacity = 0.82, -- weniger = mehr durchsichtig
-  blur = 35,
-}
-
-local SOLID = {
-  opacity = 1.0,
-  blur = 0,
-}
-
--- Start im Glass-Mode
-wezterm.GLOBAL.is_glass = true
-
-wezterm.on("toggle-glass", function(window, _pane)
-  wezterm.GLOBAL.is_glass = not wezterm.GLOBAL.is_glass
-  local p = wezterm.GLOBAL.is_glass and GLASS or SOLID
-
-  -- Runtime Overrides setzen (ohne Neustart)
-  window:set_config_overrides({
-    window_background_opacity = p.opacity,
-    macos_window_background_blur = p.blur,
-  })
-end)
-
-return {
-  -- Chrome weg, damit es "verschmilzt"
-  window_decorations = "RESIZE", -- keine Titlebar, nur resize
-  enable_tab_bar = false,
-
-
-  window_background_opacity = GLASS.opacity,
-  macos_window_background_blur = GLASS.blur,
-
-
-  window_padding = {
-    left = 18,
-    right = 18,
-    top = 14,
-    bottom = 14,
-  },
-
-  -- Performance / Smoothness
-  front_end = "WebGpu",
-  animation_fps = 120,
-  max_fps = 120,
-
-
-  font = wezterm.font_with_fallback({
-    "JetBrainsMono Nerd Font",
-    "SF Mono",
-  }),
-  font_size = 14.0,
-
-
-  default_cursor_style = "BlinkingBar",
-
-  -- Keybinding: CMD+U toggle Glass/Solid
-  keys = {
-    {
-      key = "u",
-      mods = "CMD",
-      action = act.EmitEvent("toggle-glass"),
-    },
-  },
-
-  colors = {
-    background = "#0b0f14",
-  },
-}
-    '';
+    extraConfig = builtins.readFile ./wezterm.lua;
+  };
+  programs.zsh = {
+    enable = true;
+    initContent = builtins.readFile ./.zshrc;
+    profileExtra = builtins.readFile ./.zprofile-onyx;
   };
 
   programs.vscode = {
@@ -328,6 +272,9 @@ return {
             "editor.formatOnPaste" = false;
             "editor.suggestSelection" = "recentlyUsedByPrefix";
           };
+          "github.copilot.enable" = {
+            "*" = false;
+          };
         };
       };
     };
@@ -335,6 +282,7 @@ return {
 
   programs.starship = {
     enable = true;
+    enableZshIntegration = true;
     # custom settings
     settings = {
       add_newline = true;
