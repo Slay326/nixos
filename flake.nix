@@ -160,6 +160,7 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKv9OqoVkdHyxXZ1n7ZUNOvb6ANAOiMUVZBOnhMPBcwI sleither.reyes@gmx.de" #Maybe remove this
           "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICKXQxIZdFAYE0kDI/73H7vWZJWsVCgY+R7OPeNbfD9zAAAABHNzaDo= ssh:"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC50x5DkP6krKFqSkL0vP6zU1o1VsTju91SEuoudqgVi quartz"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMdwPMCh37mVvmKFBFuPW8DqR4v8+HWq0bRe6LC/3UoC onyx"
         ];
       };
     };
