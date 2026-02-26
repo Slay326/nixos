@@ -1,3 +1,22 @@
+# SSH
+# stable socket path
+export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+
+# start agent if needed
+if [ -e "$SSH_AUTH_SOCK" ] && [ ! -S "$SSH_AUTH_SOCK" ]; then
+  rm -f "$SSH_AUTH_SOCK"
+fi
+
+if [ ! -S "$SSH_AUTH_SOCK" ] || ! ssh-add -l >/dev/null 2>&1; then
+  rm -f "$SSH_AUTH_SOCK" 2>/dev/null
+  eval "$(ssh-agent -a "$SSH_AUTH_SOCK" -s)" >/dev/null
+fi
+
+# if key not loaded, load it with a timeout (will prompt once)
+if ! ssh-add -l 2>/dev/null | grep -q 'ED25519'; then
+  ssh-add -t 8h ~/.ssh/id_ed25519_touchid
+fi
+
 # TeX
 export PATH="/Library/TeX/texbin:$PATH"
 
