@@ -1,39 +1,34 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-local GLASS = {
-    opacity = 0.82,
-    blur = 35
-}
-local SOLID = {
-    opacity = 1.0,
-    blur = 0
-}
+local GLASS_OPACITY = 0.82
+local GLASS_BLUR = 35
 
 wezterm.on("toggle-glass", function(window, _pane)
-    local overrides = window:get_config_overrides() or {}
+    local overrides = window:get_config_overrides()
 
-    -- Determine "is_glass" from overrides if present,
-    -- otherwise fall back to the default config values.
-    local opacity = overrides.window_background_opacity
-    if opacity == nil then
-        opacity = GLASS.opacity -- this matches your default config
+    if overrides and overrides.window_background_opacity ~= nil then
+        window:set_config_overrides({})
+    else
+        window:set_config_overrides({
+            window_background_opacity = 1.0,
+            macos_window_background_blur = 0
+        })
     end
-
-    local is_glass = opacity < 1.0
-    local target = is_glass and SOLID or GLASS
-
-    overrides.window_background_opacity = target.opacity
-    overrides.macos_window_background_blur = target.blur
-    window:set_config_overrides(overrides)
 end)
 
 return {
-    window_decorations = "RESIZE",
+    window_decorations = "INTEGRATED_BUTTONS|RESIZE",
     enable_tab_bar = false,
 
-    window_background_opacity = GLASS.opacity,
-    macos_window_background_blur = GLASS.blur,
+    window_frame = {
+        active_titlebar_bg = "#0b0f14",
+        inactive_titlebar_bg = "#0b0f14"
+    },
+
+    window_close_confirmation = "NeverPrompt",
+    window_background_opacity = 0.82,
+    macos_window_background_blur = 35,
 
     window_padding = {
         left = 18,
@@ -58,6 +53,6 @@ return {
     }},
 
     colors = {
-        background = "#0b0f14"
+        background = "#24273a"
     }
 }

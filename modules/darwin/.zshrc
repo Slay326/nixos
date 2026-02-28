@@ -13,7 +13,7 @@ zinit light Aloxaf/fzf-tab
 autoload -U compinit && compinit
 
 # Aliases (keep only what you need)
-alias grep='rg'
+#alias grep='rg'
 #alias cat='bat'
 alias top='btop'
 alias ..='cd ..'
