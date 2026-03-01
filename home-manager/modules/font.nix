@@ -1,5 +1,5 @@
 {...}: {
- fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
   xdg.configFile."fontconfig/conf.d/60-apple-emoji.conf".text = ''
     <?xml version="1.0"?>
     <!DOCTYPE fontconfig SYSTEM "fonts.dtd">

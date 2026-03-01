@@ -30,6 +30,9 @@ in {
     SSH_AUTH_SOCK = "~/.ssh/agent";
     SSH_ASKPASS = "/opt/homebrew/bin/ssh-askpass";
     SSH_ASKPASS_REQUIRE = "force";
+    STARSHIP_CONFIG = "${config.xdg.configHome}/starship.toml";
+    STARSHIP_LOG = "error";
+    NIX_SHELL_PRESERVE_PROMPT = "1";
   };
 
   home.sessionPath = [
@@ -182,11 +185,6 @@ in {
           "explorer.confirmDragAndDrop" = false;
           "terminal.integrated.enableMultiLinePasteWarning" = "never";
           "terminal.integrated.defaultProfile.osx" = "zsh";
-          "terminal.integrated.env.osx" = {
-            "STARSHIP_CONFIG" = "${config.xdg.configHome}/starship.toml";
-            "STARSHIP_LOG" = "error";
-            "PATH" = "${pkgs.starship}/bin:${pkgs.zsh}/bin:${pkgs.coreutils}/bin:$PATH";
-          };
           "terminal.integrated.profiles.osx" = {
             "zsh" = {
               "path" = "${pkgs.zsh}/bin/zsh";
@@ -292,6 +290,7 @@ in {
           "github.copilot.enable" = {
             "*" = false;
           };
+          "discord.idleTimeout" = 1200;
         };
       };
     };
@@ -300,7 +299,6 @@ in {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    configPath = ".config/starship.toml";
   };
   xdg.configFile."starship.toml".source = ./starship.toml;
 }

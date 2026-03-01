@@ -59,23 +59,54 @@
   home-manager.backupFileExtension = "backup";
 
   system.activationScripts.applications.text = let
-    env = pkgs.buildEnv {
+    user = systemConfig.user.username;
+
+    # System packages (falls GUI-Apps dort liegen)
+    sysEnv = pkgs.buildEnv {
       name = "system-applications";
       paths = config.environment.systemPackages;
       pathsToLink = ["/Applications"];
     };
+
+    # Home-Manager User Env (das ist bei dir entscheidend)
+    userProfile = "/etc/profiles/per-user/${user}";
   in
-    pkgs.lib.mkForce ''
-      # Set up applications.
-      echo "setting up /Applications..." >&2
-      rm -rf /Applications/Nix\ Apps
-      mkdir -p /Applications/Nix\ Apps
-      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-      while read -r src; do
-        app_name=$(basename "$src")
-        echo "copying $src" >&2
-        ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-      done
+    lib.mkForce ''
+      set -euo pipefail
+
+      echo "Setting up /Applications/Nix Apps..." >&2
+
+      mkdir -p "/Applications/Nix Apps"
+
+      # Alte Finder-Aliases entfernen (aber Ordner behalten!)
+      find "/Applications/Nix Apps" -maxdepth 1 -type f -delete
+
+      create_aliases_from() {
+        local base="$1"
+        local appdir="$base/Applications"
+
+        if [ -d "$appdir" ]; then
+          echo "Scanning $appdir" >&2
+          find "$appdir" -maxdepth 1 -name "*.app" -print0 \
+            | while IFS= read -r -d "" app; do
+                app_name="$(basename "$app")"
+                echo "Creating alias for $app_name" >&2
+                ${pkgs.mkalias}/bin/mkalias \
+                  "$app" \
+                  "/Applications/Nix Apps/$app_name"
+              done
+        fi
+      }
+
+      # 1) Home-Manager / per-user Apps
+      if [ -e "${userProfile}" ]; then
+        create_aliases_from "${userProfile}"
+      fi
+
+      # 2) System-wide GUI Apps
+      create_aliases_from "${sysEnv}"
+
+      echo "Done."
     '';
 
   networking.hostName = "onyx";

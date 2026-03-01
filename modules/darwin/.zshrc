@@ -70,8 +70,5 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa $realpath'
 # fzf integration (only if installed)
 command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
 
-# Starship prompt (since you don't use p10k anymore)
-command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
-
 # Basic shell options
 setopt PROMPT_SUBST
