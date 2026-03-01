@@ -48,7 +48,7 @@ in {
     volta
     # Rust
     rustup
-
+    inputs.codex-cli-nix.packages.${pkgs.system}.default
     # Misc
     hyperfine
     glow

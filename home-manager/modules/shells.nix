@@ -10,7 +10,7 @@ let
     lolcat = "clolcat";
     neofetch = "fastfetch";
     qt-automotive = "nix develop $HOME/nixos#qt-automotive";
-    devCLion = "setsid -f clion >/dev/null 2>&1";
+    devCLion = "nix develop -c bash -lc 'setsid -f clion >/dev/null 2>&1'";
   };
 in
   {pkgs, ...}: {

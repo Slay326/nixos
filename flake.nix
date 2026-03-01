@@ -7,7 +7,7 @@
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";

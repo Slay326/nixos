@@ -99,7 +99,6 @@ slay.bootloader = {
     kdePackages.ksshaskpass
     obsidian
     termius
-    codex
     spotify
     desktop-file-utils
     colmena

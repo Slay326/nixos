@@ -61,7 +61,7 @@ in {
       kdePackages.kolourpaint
       kdePackages.ghostwriter
       kdenliveNoShaderc
-      krita
+      #krita
       #kdePackages.xwaylandvideobridge
       xdg-utils
       qpwgraph
