@@ -39,8 +39,13 @@
   home-manager.backupFileExtension = "backup";
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    useOSProber = true;
+    timeout = 10;
+    timeoutStyle = "menu";
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
