@@ -55,6 +55,11 @@ in {
         # Beispiel: plasma-manager global mitgeben
         sharedModules = [
           inputs.plasma-manager.homeModules.plasma-manager
+          inputs.stylix.homeModules.stylix
+          {
+            # Stylix currently supports only qtct for the Qt target.
+            stylix.targets.qt.platform = lib.mkDefault "qtct";
+          }
         ];
         extraSpecialArgs = {
           inherit inputs outputs systemConfig;

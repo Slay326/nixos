@@ -39,15 +39,15 @@
   home-manager.backupFileExtension = "backup";
 
   # Bootloader.
-slay.bootloader = {
-  enable = true;
-  flavor = "grub";
-  grub = {
-    useOSProber = true;
-    timeout = 10;
-    timeoutStyle = "menu";
+  slay.bootloader = {
+    enable = true;
+    flavor = "grub";
+    grub = {
+      useOSProber = true;
+      timeout = 10;
+      timeoutStyle = "menu";
+    };
   };
-};
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;

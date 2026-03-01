@@ -4,16 +4,14 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cfg = config.slay.bootloader;
-in
-{
+in {
   options.slay.bootloader = {
     enable = lib.mkEnableOption "Enable bootloader configuration";
 
     flavor = lib.mkOption {
-      type = lib.types.enum [ "systemd-boot" "grub" ];
+      type = lib.types.enum ["systemd-boot" "grub"];
       default = "systemd-boot";
       description = "Which bootloader to configure on this host.";
     };
@@ -32,7 +30,7 @@ in
       };
 
       timeoutStyle = lib.mkOption {
-        type = lib.types.enum [ "menu" "hidden" "countdown" ];
+        type = lib.types.enum ["menu" "hidden" "countdown"];
         default = "menu";
         description = "GRUB timeout style.";
       };
@@ -41,23 +39,27 @@ in
 
   config = lib.mkIf cfg.enable {
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.systemd-boot.enable = lib.mkIf (cfg.flavor == "systemd-boot") true;
-    boot.loader.grub.enable = lib.mkIf (cfg.flavor == "grub") true;
 
-    boot.loader.systemd-boot = lib.mkIf (cfg.flavor == "systemd-boot") {
-      editor = false;
-      configurationLimit = 20;
-      memtest86.enable = true;
-      netbootxyz.enable = true;
-      edk2-uefi-shell.enable = true;
-    };
+    boot.loader.systemd-boot = lib.mkMerge [
+      {enable = cfg.flavor == "systemd-boot";}
+      (lib.mkIf (cfg.flavor == "systemd-boot") {
+        editor = false;
+        configurationLimit = 20;
+        memtest86.enable = true;
+        netbootxyz.enable = true;
+        edk2-uefi-shell.enable = true;
+      })
+    ];
 
-    boot.loader.grub = lib.mkIf (cfg.flavor == "grub") {
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = cfg.grub.useOSProber;
-      timeout = cfg.grub.timeout;
-      timeoutStyle = cfg.grub.timeoutStyle;
-    };
+    boot.loader.grub = lib.mkMerge [
+      {enable = cfg.flavor == "grub";}
+      (lib.mkIf (cfg.flavor == "grub") {
+        efiSupport = true;
+        device = "nodev";
+        useOSProber = cfg.grub.useOSProber;
+        timeout = cfg.grub.timeout;
+        timeoutStyle = cfg.grub.timeoutStyle;
+      })
+    ];
   };
 }
