@@ -116,7 +116,7 @@
     ffmpeg
     fprintd
     libfprint
-    #nodejs_22
+    grub2
   ];
 
   zramSwap = {
