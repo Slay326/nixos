@@ -69,7 +69,6 @@
     {
       user = gitUserSettings;
       init.defaultBranch = "master";
-      core.autocrlf = false;
       credential.helper = "libsecret";
       rerere.enabled = true;
     }
@@ -83,6 +82,11 @@
     package = pkgs.gitFull;
     lfs.enable = true;
     settings = gitSettings;
+    extraConfig.core = {
+      autocrlf = mkDefault "input";
+      eol = mkDefault "lf";
+      safecrlf = mkDefault "warn";
+    };
   };
 
   isNonEmpty = value: value != null && value != "";
