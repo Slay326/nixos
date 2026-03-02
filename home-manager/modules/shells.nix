@@ -11,6 +11,7 @@ let
     neofetch = "fastfetch";
     qt-automotive = "nix develop $HOME/nixos#qt-automotive";
     devCLion = "nix develop -c bash -lc 'setsid -f clion >/dev/null 2>&1'";
+winboot = "sudo grub2-reboot 'Windows Boot Manager (on /dev/nvme0n1p1)' && sudo systemctl reboot";
   };
 in
   {pkgs, ...}: {

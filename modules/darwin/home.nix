@@ -122,11 +122,15 @@ in {
         signingkey = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       init.defaultBranch = "master";
-      core.autocrlf = false;
       credential.helper = "osxkeychain";
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
+    };
+    extraConfig.core = {
+      autocrlf = "input";
+      eol = "lf";
+      safecrlf = "warn";
     };
   };
 
