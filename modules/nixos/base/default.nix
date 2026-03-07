@@ -11,6 +11,22 @@
   inherit (lib) mkOption mkIf mkMerge types mkDefault;
   activeUser = config.slay.activeUser;
   hasActiveUser = activeUser != null;
+  hmBackupCommand = pkgs.writeShellScript "home-manager-backup" ''
+    set -eu
+
+    target="$1"
+    ext="''${HOME_MANAGER_BACKUP_EXT:-backup}"
+    stamp="$(date +%Y%m%d%H%M%S)"
+    backup="$target.$ext.$stamp"
+    i=0
+
+    while [ -e "$backup" ]; do
+      i=$((i + 1))
+      backup="$target.$ext.$stamp.$i"
+    done
+
+    mv -- "$target" "$backup"
+  '';
 
   cfgHome = config.slay.home;
   defaultHomeModule = inputs.self + /home-manager/home.nix;
@@ -52,14 +68,10 @@ in {
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "backup";
+        backupCommand = "${hmBackupCommand}";
         # Beispiel: plasma-manager global mitgeben
         sharedModules = [
           inputs.plasma-manager.homeModules.plasma-manager
-          inputs.stylix.homeModules.stylix
-          {
-            # Stylix currently supports only qtct for the Qt target.
-            stylix.targets.qt.platform = lib.mkDefault "qtct";
-          }
         ];
         extraSpecialArgs = {
           inherit inputs outputs systemConfig;

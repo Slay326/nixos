@@ -23,7 +23,7 @@ in {
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
-      homeManagerIntegration.autoImport = lib.mkDefault false;
+      homeManagerIntegration.autoImport = lib.mkDefault true;
 
       image = pkgs.fetchurl {
         name = "LilEarth.jpg";
