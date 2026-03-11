@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
@@ -39,6 +40,21 @@ in {
   home.sessionPath = [
     "$HOME/.volta/bin"
   ];
+
+  home.activation.repairVoltaShims = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Volta shims are absolute symlinks into the Nix store and can break after rebuild/GC.
+    # Refresh them directly here instead of calling `volta setup`, which tries to edit shell
+    # profiles and fails in the non-interactive Home Manager activation environment.
+    export VOLTA_HOME="$HOME/.volta"
+    shim="${pkgs.volta}/bin/volta-shim"
+
+    if [ -d "$VOLTA_HOME/bin" ]; then
+      for bin in "$VOLTA_HOME"/bin/*; do
+        [ -e "$bin" ] || continue
+        ln -sfn "$shim" "$bin"
+      done
+    fi
+  '';
 
   home.packages = with pkgs; [
     # Compilers
