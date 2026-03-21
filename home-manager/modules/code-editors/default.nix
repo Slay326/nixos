@@ -89,11 +89,13 @@ in {
           "editor.fontFamily" = "JetBrainsMono Nerd Font";
           "editor.fontSize" = 16.0;
           "editor.inlayHints.fontFamily" = "JetBrainsMono Nerd Font";
+          "editor.inlineSuggest.enabled" = false;
           "editor.inlineSuggest.fontFamily" = "JetBrainsMono Nerd Font";
           "editor.minimap.sectionHeaderFontSize" = 10.285714285714286;
           "explorer.confirmDragAndDrop" = false;
           "git.confirmSync" = false;
           "git.enableCommitSigning" = true;
+          "github.copilot.nextEditSuggestions.enabled" = false;
           "markdown.preview.fontFamily" = "Noto Sans";
           "markdown.preview.fontSize" = 16.0;
           "scm.inputFontFamily" = "JetBrainsMono Nerd Font";
@@ -101,10 +103,7 @@ in {
           "screencastMode.fontSize" = 64.0;
           "terminal.integrated.enableMultiLinePasteWarning" = "never";
           "terminal.integrated.fontSize" = 16.0;
-          "github.copilot.nextEditSuggestions.enabled" = false;
-          "editor.inlineSuggest.enabled" = false;
         };
-        extensions = vscodeStandardExtensions ++ vscodeCustomExtensions ++ additionalExtensions;
       };
     };
   };

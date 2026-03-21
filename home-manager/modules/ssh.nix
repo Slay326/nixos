@@ -63,6 +63,14 @@
         identitiesOnly = true;
         identityFile = "/home/slay/.ssh/id_ed25519";
       };
+
+      centauri = {
+        hostname = "192.168.2.105";
+        user = "root";
+        identitiesOnly = true;
+        identityFile = "/home/slay/.ssh/id_ed25519";
+      };
+
       windows-slave = {
         hostname = "192.168.2.47";
         user = "administrator";
