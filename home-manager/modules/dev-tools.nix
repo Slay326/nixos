@@ -65,6 +65,7 @@ in {
     # Rust
     rustup
     inputs.codex-cli-nix.packages.${pkgs.system}.default
+    inputs.claude-code-nix.packages.${pkgs.system}.default
     # Misc
     hyperfine
     glow

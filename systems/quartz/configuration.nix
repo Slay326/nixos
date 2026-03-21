@@ -27,7 +27,10 @@
   };
 
   slay.desktop.enable = true;
-  slay.bitwarden.enable = true;
+  # Temporarily disabled: the current nixpkgs revision fails to build
+  # electron-unwrapped-39.8.2 while applying 39-angle-patchdir.patch,
+  # which breaks bitwarden-desktop and the full system closure.
+  slay.bitwarden.enable = false;
   slay.hardware.bluetooth.enable = true;
   slay.hardware.uhk.enable = true;
   slay.hardware.esp32.enable = true;
@@ -107,6 +110,7 @@
     obs-studio
     opentofu
     tofu-ls
+    telegram-desktop
     qemu
     wget
     unzip
