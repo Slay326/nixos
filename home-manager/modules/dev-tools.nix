@@ -4,6 +4,7 @@
   inputs,
   ...
 }: let
+  system = pkgs.stdenv.hostPlatform.system;
   dotnet-combined = (with pkgs.dotnetCorePackages;
     combinePackages [
       sdk_10_0
@@ -64,8 +65,8 @@ in {
     volta
     # Rust
     rustup
-    inputs.codex-cli-nix.packages.${pkgs.system}.default
-    inputs.claude-code-nix.packages.${pkgs.system}.default
+    inputs.codex-cli-nix.packages.${system}.default
+    inputs.claude-code-nix.packages.${system}.default
     # Misc
     hyperfine
     glow

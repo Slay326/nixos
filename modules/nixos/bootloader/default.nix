@@ -57,9 +57,10 @@ in {
         efiSupport = true;
         device = "nodev";
         useOSProber = cfg.grub.useOSProber;
-        timeout = cfg.grub.timeout;
         timeoutStyle = cfg.grub.timeoutStyle;
       })
     ];
+
+    boot.loader.timeout = lib.mkIf (cfg.flavor == "grub") cfg.grub.timeout;
   };
 }

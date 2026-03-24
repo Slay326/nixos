@@ -3,10 +3,11 @@
   inputs,
   ...
 }: let
+  system = pkgs.stdenv.hostPlatform.system;
   # plugins are currently broken, see https://github.com/nixos/nixpkgs/issues/400317
   #plugins = ["github-copilot" "ideavim"];
   meenzen = import inputs.nixpkgs-meenzen {
-    system = pkgs.system;
+    inherit system;
     config.allowUnfree = true;
   };
   plugins = [];

@@ -81,12 +81,15 @@
     enable = true;
     package = pkgs.gitFull;
     lfs.enable = true;
-    settings = gitSettings;
-    extraConfig.core = {
-      autocrlf = mkDefault "input";
-      eol = mkDefault "lf";
-      safecrlf = mkDefault "warn";
-    };
+    settings =
+      gitSettings
+      // {
+        core = {
+          autocrlf = mkDefault "input";
+          eol = mkDefault "lf";
+          safecrlf = mkDefault "warn";
+        };
+      };
   };
 
   isNonEmpty = value: value != null && value != "";

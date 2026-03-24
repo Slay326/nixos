@@ -23,6 +23,14 @@ in {
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      wireplumber.extraConfig = lib.mkIf (config.networking.hostName == "quartz-nix") {
+        "90-quartz-default-volume" = {
+          "wireplumber.settings" = {
+            "device.restore-routes" = false;
+            "device.routes.default-sink-volume" = 1.0;
+          };
+        };
+      };
       #jack.enable = true;
     };
 

@@ -19,6 +19,8 @@
       };
     };
 
+    input.keyboard.numlockOnStartup = "on";
+
     panels = [
       {
         floating = true;

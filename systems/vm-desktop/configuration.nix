@@ -5,7 +5,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}: let
+  system = pkgs.stdenv.hostPlatform.system;
+in {
   imports = ["${modulesPath}/virtualisation/qemu-vm.nix"];
   system.stateVersion = "24.11";
   networking.hostName = "vm-desktop";
@@ -33,13 +35,13 @@
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${system}.hyprland;
     xwayland.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
+    inputs.hyprland-contrib.packages.${system}.grimblast
+    inputs.hyprpaper.packages.${system}.hyprpaper
   ];
 
   virtualisation.sharedDirectories = {
