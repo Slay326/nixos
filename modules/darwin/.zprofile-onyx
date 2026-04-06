@@ -1,41 +1,62 @@
-# SSH
-# stable socket path
+# =========================
+# SSH AGENT (stable socket)
+# =========================
 export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
 
-# start agent if needed
+# Fix broken socket
 if [ -e "$SSH_AUTH_SOCK" ] && [ ! -S "$SSH_AUTH_SOCK" ]; then
   rm -f "$SSH_AUTH_SOCK"
 fi
 
+# Start agent if needed
 if [ ! -S "$SSH_AUTH_SOCK" ] || ! ssh-add -l >/dev/null 2>&1; then
   rm -f "$SSH_AUTH_SOCK" 2>/dev/null
   eval "$(ssh-agent -a "$SSH_AUTH_SOCK" -s)" >/dev/null
 fi
 
-# if key not loaded, load it with a timeout (will prompt once)
+# Load key (will prompt once, then cached)
 if ! ssh-add -l 2>/dev/null | grep -q 'ED25519'; then
   ssh-add -t 8h ~/.ssh/id_ed25519_touchid
 fi
 
-# TeX
-export PATH="/Library/TeX/texbin:$PATH"
 
-# Volta
+# =========================
+# HOMEBREW (base system)
+# =========================
+# sets PATH, MANPATH, etc cleanly
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# =========================
+# VOLTA (must override brew node)
+# =========================
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-# Local bins
-export PATH="$HOME/.local/bin:$PATH"
 
-# Homebrew + system bins
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+# =========================
+# LOCAL / USER BINARIES
+# =========================
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
+
+# =========================
 # .NET
+# =========================
 export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$DOTNET_ROOT:$HOME/bin:$PATH"
+export PATH="$DOTNET_ROOT:$PATH"
 export DOTNET_MULTILEVEL_LOOKUP=0
 
-# Nix daemon environment
+
+# =========================
+# TEX
+# =========================
+export PATH="/Library/TeX/texbin:$PATH"
+
+
+# =========================
+# NIX (darwin / daemon)
+# =========================
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi

@@ -69,6 +69,15 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa $realpath'
 
 # fzf integration (only if installed)
 command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
+eval "$(direnv hook zsh)"                                                                                            
+
 
 # Basic shell options
 setopt PROMPT_SUBST
+
+# Force Volta to win after all sourced scripts
+export VOLTA_HOME="$HOME/.volta"
+typeset -U path PATH
+path=("$VOLTA_HOME/bin" ${path:#$VOLTA_HOME/bin})
+export PATH
+hash -r
