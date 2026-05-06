@@ -61,7 +61,8 @@ in {
     # Compilers
     dotnet-combined
     gcc
-
+    cmake
+    gnumake
     volta
     # Rust
     rustup
