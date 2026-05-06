@@ -72,6 +72,9 @@ command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
 eval "$(direnv hook zsh)"                                                                                            
 
 
+eval "$(pyenv init --path)"
+eval "$(pyenv init - zsh)"
+
 # Basic shell options
 setopt PROMPT_SUBST
 
