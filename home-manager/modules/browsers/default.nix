@@ -23,6 +23,7 @@ in {
   ];
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
     #package = pkgs.firefox-nightly-bin;
 
     profiles.default = {

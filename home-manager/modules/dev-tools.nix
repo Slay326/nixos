@@ -74,6 +74,9 @@ in {
     tokei
     difftastic
     terraform
+    opentofu
+    age
+    sops
     xclip
   ];
 

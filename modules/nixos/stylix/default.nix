@@ -36,7 +36,7 @@ in {
       base16Scheme = "${pkgs.base16-schemes}/share/themes/purpledream.yaml";
 
       # Single source of truth for Qt platform; override per host via slay.stylix.qtPlatform.
-      targets.qt.platform = lib.mkDefault cfg.qtPlatform;
+      targets.qt.platform = lib.mkForce cfg.qtPlatform;
 
       cursor = {
         name = "breeze_cursors";
