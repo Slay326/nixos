@@ -1,6 +1,7 @@
 {
   imports = [
     ./base
+    ./android
     ./basic-packages
     ./bitwarden
     ./bootloader

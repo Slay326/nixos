@@ -27,6 +27,7 @@
   };
 
   slay.desktop.enable = true;
+  slay.android.enable = true;
   # Temporarily disabled: the current nixpkgs revision fails to build
   # electron-unwrapped-39.8.2 while applying 39-angle-patchdir.patch,
   # which breaks bitwarden-desktop and the full system closure.

@@ -16,13 +16,13 @@
         addKeysToAgent = "yes";
         forwardAgent = false;
         compression = true;
-        serverAliveInterval = 0;
-        serverAliveCountMax = 3;
+        serverAliveInterval = 30;
+        serverAliveCountMax = 2;
         hashKnownHosts = false;
         userKnownHostsFile = "~/.ssh/known_hosts";
         controlMaster = "auto";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "60m";
+        controlPath = "~/.ssh/master-%C";
+        controlPersist = "10m";
       };
       # Proxmox Virtual Environment
       andromeda = {
