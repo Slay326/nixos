@@ -27,86 +27,92 @@ in {
   ];
 
   home.sessionVariables = {
-    SSH_AUTH_SOCK = "~/.ssh/agent";
+    SSH_AUTH_SOCK = "/Users/og326/.ssh/agent.sock";
     SSH_ASKPASS = "/opt/homebrew/bin/ssh-askpass";
-    SSH_ASKPASS_REQUIRE = "force";
+    SSH_ASKPASS_REQUIRE = "prefer";
     STARSHIP_CONFIG = "${config.xdg.configHome}/starship.toml";
     STARSHIP_LOG = "error";
     NIX_SHELL_PRESERVE_PROMPT = "1";
   };
 
   home.sessionPath = [
-    "/opt/homebrew/bin/ssh"
-    "/opt/homebrew/bin/git"
+    "/opt/homebrew/bin"
   ];
 
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
+        AddKeysToAgent = "yes";
+        IdentityAgent = "/Users/og326/.ssh/agent.sock";
       };
       #compression = true;
       #controlMaster = "auto";
       #controlPersist = "60m";
       github = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
-        identitiesOnly = true;
-        extraOptions = {
-          ControlMaster = "no";
-          ControlPath = "none";
-          ControlPersist = "no";
-        };
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        IdentitiesOnly = true;
+        ControlMaster = "no";
+        ControlPath = "none";
+        ControlPersist = "no";
+      };
+      "git.sleither.net" = {
+        HostName = "git.sleither.net";
+        User = "gitlab";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        IdentitiesOnly = true;
+        IdentityAgent = "/Users/og326/.ssh/agent.sock";
+        AddKeysToAgent = "yes";
       };
       # Proxmox Virtual Environment Realm
       andromeda = {
-        user = "root";
-        hostname = "138.201.57.80";
-        port = 2222;
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        User = "root";
+        HostName = "138.201.57.80";
+        Port = 2222;
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       mercury = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.10";
-        proxyJump = "andromeda";
-        user = "root";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        HostName = "10.0.0.10";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       silicon = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.20";
-        proxyJump = "andromeda";
-        user = "root";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        HostName = "10.0.0.20";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.21";
-        proxyJump = "andromeda";
-        user = "root";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        HostName = "10.0.0.21";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       atlas = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.30";
-        proxyJump = "andromeda";
-        user = "root";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        HostName = "10.0.0.30";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       phoenix = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.31";
-        proxyJump = "andromeda";
-        user = "root";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        HostName = "10.0.0.31";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       quartz-win = {
-        user = "sleit";
-        hostname = "192.168.2.35";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        User = "sleit";
+        HostName = "192.168.2.35";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
       quartz-nix = {
-        user = "slay";
-        hostname = "192.168.2.35";
-        identityFile = "/Users/og326/.ssh/id_ed25519_touchid";
+        User = "slay";
+        HostName = "192.168.2.35";
+        IdentityFile = "/Users/og326/.ssh/id_ed25519_touchid";
       };
     };
   };
@@ -115,22 +121,23 @@ in {
     enable = true;
     package = pkgs.gitFull;
     lfs.enable = true;
+    signing.format = "ssh";
     settings = {
       user = {
         name = "Sleither Reyes";
         email = "sleither.reyes@gmx.de";
-        signingkey = "/Users/og326/.ssh/id_ed25519_touchid";
+        signingkey = "/Users/og326/.ssh/id_ed25519_touchid.pub";
       };
       init.defaultBranch = "master";
       credential.helper = "osxkeychain";
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
-    };
-    extraConfig.core = {
-      autocrlf = "input";
-      eol = "lf";
-      safecrlf = "warn";
+      core = {
+        autocrlf = "input";
+        eol = "lf";
+        safecrlf = "warn";
+      };
     };
   };
 

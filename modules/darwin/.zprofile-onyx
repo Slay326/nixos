@@ -1,4 +1,12 @@
 # =========================
+# HOME MANAGER
+# =========================
+if [ -e "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]; then
+  . "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+fi
+
+
+# =========================
 # SSH AGENT (stable socket)
 # =========================
 export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
@@ -14,9 +22,13 @@ if [ ! -S "$SSH_AUTH_SOCK" ] || ! ssh-add -l >/dev/null 2>&1; then
   eval "$(ssh-agent -a "$SSH_AUTH_SOCK" -s)" >/dev/null
 fi
 
-# Load key (will prompt once, then cached)
-if ! ssh-add -l 2>/dev/null | grep -q 'ED25519'; then
-  ssh-add -t 8h ~/.ssh/id_ed25519_touchid
+# Load Git/SSH key only if this exact key is missing from the agent.
+# The previous ED25519 check was too broad because other ED25519 keys may be loaded.
+SSH_MAIN_KEY="$HOME/.ssh/id_ed25519_touchid"
+SSH_MAIN_KEY_FINGERPRINT="$(ssh-keygen -lf "$SSH_MAIN_KEY.pub" -E sha256 2>/dev/null | awk '{print $2}')"
+
+if [ -n "$SSH_MAIN_KEY_FINGERPRINT" ] && ! ssh-add -l -E sha256 2>/dev/null | grep -q "$SSH_MAIN_KEY_FINGERPRINT"; then
+  ssh-add --apple-use-keychain -t 8h "$SSH_MAIN_KEY" 2>/dev/null || ssh-add -t 8h "$SSH_MAIN_KEY"
 fi
 
 

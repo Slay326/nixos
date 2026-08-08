@@ -76,8 +76,21 @@ eval "$(direnv hook zsh)"
 setopt PROMPT_SUBST
 
 # Force Volta to win after all sourced scripts
+
 export VOLTA_HOME="$HOME/.volta"
+
 typeset -U path PATH
-path=("$VOLTA_HOME/bin" ${path:#$VOLTA_HOME/bin})
+
+path=(
+
+  "$VOLTA_HOME/bin"
+
+  "$HOME/.dotnet/tools"
+
+  ${path:#$VOLTA_HOME/bin}
+
+)
+
 export PATH
+
 hash -r

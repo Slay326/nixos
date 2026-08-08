@@ -11,70 +11,70 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
-        forwardAgent = false;
-        compression = true;
-        serverAliveInterval = 0;
-        serverAliveCountMax = 3;
-        hashKnownHosts = false;
-        userKnownHostsFile = "~/.ssh/known_hosts";
-        controlMaster = "auto";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "60m";
+        AddKeysToAgent = "yes";
+        ForwardAgent = false;
+        Compression = true;
+        ServerAliveInterval = 0;
+        ServerAliveCountMax = 3;
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = "60m";
       };
       # Proxmox Virtual Environment
       andromeda = {
-        user = "root";
-        hostname = "138.201.57.80";
-        port = 2222;
+        User = "root";
+        HostName = "138.201.57.80";
+        Port = 2222;
       };
       git = {
-        hostname = "git.sleither.net";
-        user = "gitlab";
-        identitiesOnly = true;
+        HostName = "git.sleither.net";
+        User = "gitlab";
+        IdentitiesOnly = true;
       };
       mercury = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.10";
-        proxyJump = "andromeda";
-        user = "root";
-        identitiesOnly = true;
-        identityFile = "/home/slay/.ssh/id_ed25519";
+        HostName = "10.0.0.10";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentitiesOnly = true;
+        IdentityFile = "/home/slay/.ssh/id_ed25519";
       };
       silicon = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.20";
-        proxyJump = "andromeda";
-        user = "root";
-        identitiesOnly = true;
-        identityFile = "/home/slay/.ssh/id_ed25519";
+        HostName = "10.0.0.20";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentitiesOnly = true;
+        IdentityFile = "/home/slay/.ssh/id_ed25519";
       };
       voyager-01 = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.21";
-        proxyJump = "andromeda";
-        user = "root";
-        identitiesOnly = true;
-        identityFile = "/home/slay/.ssh/id_ed25519";
+        HostName = "10.0.0.21";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentitiesOnly = true;
+        IdentityFile = "/home/slay/.ssh/id_ed25519";
       };
       atlas = lib.hm.dag.entryAfter ["andromeda"] {
-        hostname = "10.0.0.30";
-        proxyJump = "andromeda";
-        user = "root";
-        identitiesOnly = true;
-        identityFile = "/home/slay/.ssh/id_ed25519";
+        HostName = "10.0.0.30";
+        ProxyJump = "andromeda";
+        User = "root";
+        IdentitiesOnly = true;
+        IdentityFile = "/home/slay/.ssh/id_ed25519";
       };
 
       centauri = {
-        hostname = "192.168.2.105";
-        user = "root";
-        identitiesOnly = true;
-        identityFile = "/home/slay/.ssh/id_ed25519";
+        HostName = "192.168.2.105";
+        User = "root";
+        IdentitiesOnly = true;
+        IdentityFile = "/home/slay/.ssh/id_ed25519";
       };
 
       windows-slave = {
-        hostname = "192.168.2.47";
-        user = "administrator";
-        identitiesOnly = true;
+        HostName = "192.168.2.47";
+        User = "administrator";
+        IdentitiesOnly = true;
       };
     };
   };
