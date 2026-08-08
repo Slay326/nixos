@@ -20,6 +20,9 @@ in {
     #slay.javascript.enable = true;
     slay.plasma.enable = true;
     slay.stylix.enable = true;
+    # Plasma provides the native KDE Qt platform theme; qtct can select Kvantum
+    # and break Plasma QML when that plugin is not present.
+    slay.stylix.qtPlatform = "kde";
     slay.yubikey.enable = true;
   };
 }

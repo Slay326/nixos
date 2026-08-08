@@ -39,7 +39,9 @@ in {
     services.printing.enable = true;
 
     services.displayManager.sddm.enable = true;
-    #services.displayManager.sddm.wayland.enable = true; # SDDM Wayland support is still a little unstable
+    # Keep SDDM's greeter on X11. Plasma itself still defaults to the Wayland session.
+    services.displayManager.sddm.wayland.enable = false;
+    services.displayManager.defaultSession = "plasma";
     services.desktopManager.plasma6.enable = true;
     services.desktopManager.plasma6.enableQt5Integration = true;
 
@@ -52,15 +54,7 @@ in {
     environment.sessionVariables.XDG_CURRENT_DESKTOP = "KDE";
     environment.sessionVariables.GTK_USE_PORTAL = "1";
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-kde
-      ];
-    };
-
     environment.systemPackages = with pkgs; [
-      kdePackages.xdg-desktop-portal-kde
       kdePackages.filelight
       kdePackages.kruler
       kdePackages.kcolorchooser

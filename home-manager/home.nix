@@ -14,7 +14,6 @@
     ./modules/git.nix
     ./modules/gpg.nix
     ./modules/fun.nix
-    ./modules/font.nix
     ./modules/ghostty.nix
     ./modules/starship.nix
     ./modules/wezterm.nix

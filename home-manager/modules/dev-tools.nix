@@ -60,8 +60,10 @@ in {
   home.packages = with pkgs; [
     # Compilers
     dotnet-combined
+    dotnet-ef
     gcc
-
+    cmake
+    gnumake
     volta
     # Rust
     rustup
@@ -73,7 +75,12 @@ in {
     tokei
     difftastic
     terraform
+    opentofu
+    postman
+    age
+    sops
     xclip
+    yt-dlp
   ];
 
   programs.zsh.initContent = ''

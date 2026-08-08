@@ -12,7 +12,7 @@ in {
     qtPlatform = lib.mkOption {
       type = lib.types.enum ["kde" "qtct"];
       default = "qtct";
-      description = "Qt platform theme for Stylix. Override per host via slay.stylix.qtPlatform (Stylix currently supports only qtct).";
+      description = "Qt platform strategy. qtct enables Stylix Qt theming; kde leaves Plasma's native Qt theme in control.";
     };
   };
 
@@ -21,6 +21,12 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
+    home-manager.sharedModules = lib.mkIf (cfg.qtPlatform == "kde") [
+      {
+        stylix.targets.qt.enable = false;
+      }
+    ];
+
     stylix = {
       enable = true;
       homeManagerIntegration.autoImport = lib.mkDefault true;
@@ -35,8 +41,16 @@ in {
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/purpledream.yaml";
 
-      # Single source of truth for Qt platform; override per host via slay.stylix.qtPlatform.
-      targets.qt.platform = lib.mkDefault cfg.qtPlatform;
+      targets.qt =
+        if cfg.qtPlatform == "qtct"
+        then {
+          enable = true;
+          platform = lib.mkForce "qtct";
+        }
+        else {
+          enable = false;
+        };
+      targets.kmscon.enable = false;
 
       cursor = {
         name = "breeze_cursors";
