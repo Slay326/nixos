@@ -65,7 +65,9 @@ in {
   config = mkMerge [
     {
       home-manager = {
-        useGlobalPkgs = true;
+        # Stylix adds small overlays to Home Manager's package set. Use a
+        # separate package set so those overlays remain supported.
+        useGlobalPkgs = false;
         useUserPackages = true;
         backupFileExtension = "backup";
         backupCommand = "${hmBackupCommand}";
@@ -105,9 +107,12 @@ in {
 
       # HM nur für diesen User – KEIN home.username/home.homeDirectory in HM setzen!
       {
-        home-manager.users.${activeUser.username}.imports = [
-          resolvedHomeModule
-        ];
+        home-manager.users.${activeUser.username} = {
+          imports = [
+            resolvedHomeModule
+          ];
+          nixpkgs.config.allowUnfree = true;
+        };
       }
 
       # Optional: SSH-only (keine Passwörter in der Flake)

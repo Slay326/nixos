@@ -4,7 +4,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  moviebox-tui = pkgs.callPackage ../../packages/moviebox-tui.nix {};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -58,6 +60,10 @@
 
   networking.hostName = "quartz-nix";
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [8081];
+  networking.firewall.allowedUDPPorts = [
+    51820
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -112,6 +118,7 @@
     fprintd
     libfprint
     grub2
+    moviebox-tui
   ];
 
   zramSwap = {

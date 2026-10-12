@@ -5,7 +5,7 @@
 }: {
   home.packages = with pkgs; [
     onedrive
+    _1password-gui
   ];
-  gtk.gtk4.theme = config.gtk.theme;
   stylix.targets.ghostty.enable = false;
 }

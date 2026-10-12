@@ -52,7 +52,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       #inputs.home-manager.follows = "home-manager";
     };
-    nixvim.url = "github:nix-community/nixvim";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -236,9 +239,13 @@
         exit 0
       '';
     in {
-      packages = {
-        wl-ocr = wl-ocr;
-      };
+      packages =
+        {
+          wl-ocr = wl-ocr;
+        }
+        // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+          moviebox-tui = pkgs.callPackage ./packages/moviebox-tui.nix {};
+        };
 
       devShells = {
         default = pkgs.mkShell {

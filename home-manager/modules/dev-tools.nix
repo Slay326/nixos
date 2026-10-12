@@ -72,6 +72,7 @@ in {
     # Misc
     hyperfine
     glow
+    gitlab-ci-local
     tokei
     difftastic
     terraform
@@ -81,6 +82,7 @@ in {
     sops
     xclip
     yt-dlp
+    mitmproxy
   ];
 
   programs.zsh.initContent = ''

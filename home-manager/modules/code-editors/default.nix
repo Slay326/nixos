@@ -65,6 +65,10 @@
 
   additionalExtensions = [];
 in {
+  # Stylix themes VS Code per profile. Keep the generated theme attached to
+  # the profile used by this configuration.
+  stylix.targets.vscode.profileNames = ["default"];
+
   home.packages = [
     # Editors
     pkgs.vscode

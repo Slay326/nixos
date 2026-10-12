@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -euo pipefail
 
 LIGHT_BLUE='\033[1;34m'
 NO_COLOR='\033[0m'
@@ -9,11 +9,15 @@ print () {
     echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
 }
 
-print "=> Starting Install"
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+host="${NIXOS_CONFIG:-$(hostname)}"
+
+cd "$repo_root"
+
+print "=> Starting installation for $host"
 
 print "==> Formatting Code"
-alejandra . >/dev/null 2>&1
+alejandra .
 
 print "==> Rebuilding NixOS"
-git add .
-sudo nixos-rebuild switch --upgrade --verbose --flake . $@
+sudo nixos-rebuild switch --upgrade --verbose --flake ".#$host" "$@"

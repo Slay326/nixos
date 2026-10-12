@@ -13,16 +13,16 @@
     enableDefaultConfig = false;
     settings = {
       "*" = {
-        addKeysToAgent = "yes";
-        forwardAgent = false;
-        compression = true;
-        serverAliveInterval = 30;
-        serverAliveCountMax = 2;
-        hashKnownHosts = false;
-        userKnownHostsFile = "~/.ssh/known_hosts";
-        controlMaster = "auto";
-        controlPath = "~/.ssh/master-%C";
-        controlPersist = "10m";
+        AddKeysToAgent = "yes";
+        ForwardAgent = false;
+        Compression = true;
+        ServerAliveInterval = 30;
+        ServerAliveCountMax = 2;
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/master-%C";
+        ControlPersist = "10m";
       };
       # Proxmox Virtual Environment
       andromeda = {

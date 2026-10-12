@@ -48,6 +48,7 @@
                   "applications:firefox.desktop"
                   "applications:vesktop.desktop"
                   "applications:spotify.desktop"
+                  "applications:obsidian.desktop"
                 ]
                 ++ extraConfig.additionalPinnedApps;
             };

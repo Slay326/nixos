@@ -29,6 +29,9 @@ in {
 
     stylix = {
       enable = true;
+      # Let Stylix propagate its complete configuration to Home Manager.
+      # Importing only the HM module leaves `home-manager.*.stylix.enable`
+      # false, so all per-user targets are skipped.
       homeManagerIntegration.autoImport = lib.mkDefault true;
 
       image = pkgs.fetchurl {

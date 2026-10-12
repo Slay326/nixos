@@ -21,6 +21,9 @@ in {
   # Faster build, see https://nixos.wiki/wiki/Creating_a_NixOS_live_CD#Building_faster
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
+  # Keep the safer NixOS 26.11 behaviour explicit for the installer image.
+  boot.zfs.forceImportRoot = false;
+
   # Enable the OpenSSH server so we can install the system remotely
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
   users.users.root.openssh.authorizedKeys.keys = activeUser.authorizedKeys;
