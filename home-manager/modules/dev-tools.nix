@@ -74,6 +74,7 @@ in {
     glow
     gitlab-ci-local
     tokei
+    sbctl
     difftastic
     terraform
     opentofu
